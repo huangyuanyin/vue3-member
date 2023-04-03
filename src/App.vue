@@ -1,7 +1,11 @@
 <template>
   <div id="app" v-cloak>
     <div
-      v-if="this.$route.path !== '/home' && this.$route.path !== '/home2'"
+      v-if="
+        this.$route.path !== '/home' &&
+          this.$route.path !== '/home2' &&
+          this.$route.path !== '/login'
+      "
       class="page-title-wrapper"
     >
       <span class="page-title">
@@ -16,25 +20,25 @@
 </template>
 <script>
 export default {
-  name: "app",
+  name: 'app',
   methods: {
     returnRouteName() {
-      let route = this.$route.path;
+      let route = this.$route.path
       switch (route) {
-        case "/overview":
-          return "系统概况专题111";
-        case "/summary":
-          return "数据归集专题";
-        case "/public":
-          return "双公示专题";
-        case "/union":
-          return "联合奖惩专题";
-        case "/map":
-          return "区域数据归集";
+        case '/overview':
+          return '系统概况专题111'
+        case '/summary':
+          return '数据归集专题'
+        case '/public':
+          return '双公示专题'
+        case '/union':
+          return '联合奖惩专题'
+        case '/map':
+          return '区域数据归集'
       }
     }
   }
-};
+}
 </script>
 <style lang="stylus">
 [v-cloak] {

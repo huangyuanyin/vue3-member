@@ -50,11 +50,11 @@ export const constantRouterMap = [
     redirect: { name: 'SummaryMap' }
   },
   // 登录
-  // {
-  //   path: '/login',
-  //   name: 'login',
-  //   component: () => import('../views/Login.vue')
-  // },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../Login.vue')
+  }
   // {
   //   path: '/401',
   //   component: () => import(/* webpackChunkName: "error" */ '../views/error/401.vue')
@@ -74,6 +74,4 @@ export const constantRouterMap = [
 ]
 
 // 重新组织后导出
-export default [
-  ...constantRouterMap
-]
+export default [...constantRouterMap]
