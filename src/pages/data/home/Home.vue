@@ -173,11 +173,11 @@
         </div>
       </div>
     </div>
-    <div class="center-wrapper">
+    <!-- <div class="center-wrapper">
       <div class="title">
         <span class="title-zh">菩提阁</span>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
