@@ -325,7 +325,7 @@ export default {
   },
   methods: {
     toLink() {
-      window.open("https://www.baidu.com");
+      window.open("http://117.78.39.56:8304/#/");
     }
   },
   components: {

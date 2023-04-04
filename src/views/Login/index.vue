@@ -138,22 +138,26 @@ export default {
         // valid = true;
         if (valid) {
           this.loginLoading = true;
-          let res = await loginApi(this.formLogin);
-          this.loginLoading = false;
-          // 登录
-          if (res.code === 1) {
-            this.$router.push("/home");
-            localStorage.setItem("token", "111");
-            localStorage.setItem("userInfo", JSON.stringify(res.data));
-          } else {
-            this.$message.error(res.msg);
-          }
+          loginApi(this.formLogin)
+            .then(res => {
+              this.loginLoading = false;
+              // 登录
+              if (res.code === 1) {
+                this.$router.push("/home");
+                localStorage.setItem("token", "111");
+                localStorage.setItem("userInfo", JSON.stringify(res.data));
+              } else {
+                this.$message.error(res.msg);
+              }
+            })
+            .catch(err => {
+              this.loginLoading = false;
+              this.$message.error(err);
+            });
+
           // loginApi(this.formLogin)
           //   .then(res => this.loginSuccess(res))
           //   .catch(err => this.requestFailed(err));
-        } else {
-          // 登录表单校验失败
-          // this.$message({ type: "danger", content: "请输入登录信息后登录" });
         }
       });
     },
