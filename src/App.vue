@@ -8,7 +8,7 @@
         {{ returnRouteName() }}
       </span>
       <span class="to-home">
-        <el-button type="text" @click="logout">退出</el-button>
+        <el-button size="small" type="text" @click="logout">退出登录</el-button>
       </span>
     </div>
     <router-view />
@@ -32,7 +32,7 @@ export default {
         case "/map":
           return "区域数据归集";
         case "/home":
-          return "首页";
+          return "中航天智慧工地综合管理平台";
       }
     },
     logout() {
@@ -83,8 +83,8 @@ i
 .page-title-wrapper
   background-image: url('~@/assets/images/overview/title_bg.png')
   background-repeat: no-repeat
-  -webkit-background-size: auto 72px
-  background-size: auto 72px
+  -webkit-background-size: auto 100px
+  background-size: auto 100px
   background-position: top center
   width: 100%
   text-align center
@@ -94,7 +94,7 @@ i
 
   .to-home
     position absolute
-    right: 40px
+    left: 10%
     bottom 0
     background-color: #0d1b4d
     padding 4px 20px
@@ -111,7 +111,7 @@ a
   -webkit-text-fill-color: transparent;
   font-weight: 700
   font-size: 36px
-  line-height: 40px
+  line-height: 60px
   padding 10px 0
   letter-spacing 10px
 .white-font

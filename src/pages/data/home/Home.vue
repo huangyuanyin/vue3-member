@@ -9,7 +9,7 @@
       ></canvas>
     </div>
     <div class="bg-wrapper">
-      <div class="container">
+      <div class="container" @click="toLink()">
         <!-- <div class="background-img"> -->
         <div class="box" style="top:30%;left: 25%;">
           <span></span>
@@ -22,7 +22,7 @@
               size="30"
               className="aaa"
             ></svg-icon>
-            <h2>链接1</h2>
+            <h2>建科研</h2>
             <!-- <p>
               <a
                 >All our modules are designed to play nicely with responsive of
@@ -33,7 +33,7 @@
           </div>
         </div>
       </div>
-      <div class="container">
+      <div class="container" @click="toLink()">
         <!-- <div class="background-img"> -->
         <div class="box" style="top:30%;left: 50%;">
           <span></span>
@@ -46,7 +46,7 @@
               size="30"
               className="aaa"
             ></svg-icon>
-            <h2>链接1</h2>
+            <h2>建科研</h2>
             <!-- <p>
               <a
                 >All our modules are designed to play nicely with responsive of
@@ -57,7 +57,7 @@
           </div>
         </div>
       </div>
-      <div class="container">
+      <div class="container" @click="toLink()">
         <!-- <div class="background-img"> -->
         <div class="box" style="top:30%;left: 75%;">
           <span></span>
@@ -70,7 +70,7 @@
               size="30"
               className="aaa"
             ></svg-icon>
-            <h2>链接1</h2>
+            <h2>建科研</h2>
             <!-- <p>
               <a
                 >All our modules are designed to play nicely with responsive of
@@ -81,7 +81,7 @@
           </div>
         </div>
       </div>
-      <div class="container">
+      <div class="container" @click="toLink()">
         <!-- <div class="background-img"> -->
         <div class="box" style="top:55%;left: 25%;">
           <span></span>
@@ -94,7 +94,7 @@
               size="30"
               className="aaa"
             ></svg-icon>
-            <h2>链接4</h2>
+            <h2>建科研</h2>
             <!-- <p>
               <a
                 >All our modules are designed to play nicely with responsive of
@@ -105,7 +105,7 @@
           </div>
         </div>
       </div>
-      <div class="container">
+      <div class="container" @click="toLink()">
         <!-- <div class="background-img"> -->
         <div class="box" style="top:55%;left: 50%;">
           <span></span>
@@ -118,7 +118,7 @@
               size="30"
               className="aaa"
             ></svg-icon>
-            <h2>链接5</h2>
+            <h2>建科研</h2>
             <!-- <p>
               <a
                 >All our modules are designed to play nicely with responsive of
@@ -129,7 +129,7 @@
           </div>
         </div>
       </div>
-      <div class="container">
+      <div class="container" @click="toLink()">
         <!-- <div class="background-img"> -->
         <div class="box" style="top:55%;left: 75%;">
           <span></span>
@@ -142,7 +142,7 @@
               size="30"
               className="aaa"
             ></svg-icon>
-            <h2>链接6</h2>
+            <h2>建科研</h2>
             <!-- <p>
               <a
                 >All our modules are designed to play nicely with responsive of
@@ -310,18 +310,23 @@ export default {
         { x: 680, y: 640 }
       ],
       bottomList: [
-        { icon: "icon-jiankong3", name: "监控" },
-        { icon: "icon-jishufuwu", name: "监控" },
-        { icon: "icon-fuwudiqiu", name: "监控" },
-        { icon: "icon-fuwuliu", name: "监控" },
-        { icon: "icon-fuwu_o", name: "监控" },
-        { icon: "icon-fuwu1", name: "监控" },
-        { icon: "icon-fuwuqi", name: "监控" },
-        { icon: "icon-yunjiankong", name: "监控" },
-        { icon: "icon-jiankong", name: "监控" },
-        { icon: "icon-jiankong3", name: "监控" }
+        { icon: "icon-jiankong3", name: "建科研" },
+        { icon: "icon-jishufuwu", name: "建科研" },
+        { icon: "icon-fuwudiqiu", name: "建科研" },
+        { icon: "icon-fuwuliu", name: "建科研" },
+        { icon: "icon-fuwu_o", name: "建科研" },
+        { icon: "icon-fuwu1", name: "建科研" },
+        { icon: "icon-fuwuqi", name: "建科研" },
+        { icon: "icon-yunjiankong", name: "建科研" },
+        { icon: "icon-jiankong", name: "建科研" },
+        { icon: "icon-jiankong3", name: "建科研" }
       ]
     };
+  },
+  methods: {
+    toLink() {
+      window.open("https://www.baidu.com");
+    }
   },
   components: {
     Card

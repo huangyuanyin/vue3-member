@@ -1,26 +1,26 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import BinUI from 'bin-ui'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import BinUI from "bin-ui";
 
-const Home = () => import('../pages/data/home/Home')
+const Home = () => import("../pages/data/home/Home");
 // const Home2 = () => import('../pages/data/home/Home2')
 // const Overview2 = () => import('../pages/data/overview/Overview2')
-const Overview = () => import('../pages/data/overview/Overview')
-const Summary = () => import('../pages/data/summary/Summary')
-const SummaryMap = () => import('../pages/data/summary/SummaryCopy')
-const Public = () => import('../pages/data/public/Public')
-const Union = () => import('../pages/data/union/Union')
-const Login = () => import('../pages/data/Login')
+const Overview = () => import("../pages/data/overview/Overview");
+const Summary = () => import("../pages/data/summary/Summary");
+const SummaryMap = () => import("../pages/data/summary/SummaryCopy");
+const Public = () => import("../pages/data/public/Public");
+const Union = () => import("../pages/data/union/Union");
+const Login = () => import("../views/Login/index");
 // const Map = () => import('../pages/data/map/Map')
 
-Vue.use(BinUI)
+Vue.use(BinUI);
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const router = new VueRouter({
   routes: [
     {
-      path: '/home',
+      path: "/home",
       component: Home
     },
     // {
@@ -28,7 +28,7 @@ const router = new VueRouter({
     //   component: Home2
     // },
     {
-      path: '/overview',
+      path: "/overview",
       component: Overview
     },
     // {
@@ -36,30 +36,30 @@ const router = new VueRouter({
     //   component: Overview2
     // },
     {
-      path: '/summary',
+      path: "/summary",
       component: Summary
     },
     {
-      path: '/public',
+      path: "/public",
       component: Public
     },
     {
-      path: '/union',
+      path: "/union",
       component: Union
     },
     {
-      path: '/map',
+      path: "/map",
       component: SummaryMap
     },
     {
-      path: '/',
-      redirect: '/home'
+      path: "/",
+      redirect: "/home"
     },
     {
-      path: '/login',
+      path: "/login",
       component: Login
     }
   ]
-})
+});
 
-export default router
+export default router;
