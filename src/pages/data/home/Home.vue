@@ -8,7 +8,8 @@
         style="width: 100%; height: 100%"
       ></canvas>
     </div>
-    <div class="bg-wrapper">
+    <div v-if="isLoading">数据加载中....</div>
+    <div class="bg-wrapper" v-else> 
       <div
         class="container"
         v-if="counts >= 1"
@@ -191,6 +192,7 @@ export default {
     return {
       tableData: [],
       counts: 0,
+      isLoading:false,
       particleJson: {
         particles: {
           number: {
@@ -334,37 +336,53 @@ export default {
       }
       window.open(it, "_blank");
     },
-    dishPageList() {
-      dishPage({
+    async dishPageList() {
+      this.isLoading = true;
+      let res = await dishPage({
         page: 1,
         pageSize: 10
-      }).then(res => {
-        this.tableData = res.data.records || [];
-        this.counts = res.data.total;
-        // 取第七个到最后一个的数据
-        this.bottomList = this.tableData.slice(6, this.tableData.length) || [];
-        if (this.bottomList.length > 0) {
-          // 循环bottomList和iconList，给每个bottomList添加icon
-          for (var i = 0; i < this.bottomList.length; i++) {
-            this.bottomList[i].icon = this.iconList[i];
-          }
+      })
+        if(res.code === 1){
+          this.$nextTick(() => { 
+            this.tableData = res.data.records || [];
+            this.counts = res.data.total;
+            // 取第七个到最后一个的数据
+          // this.$nextTick(() => { 
+            this.bottomList = res.data.records.slice(6, res.data.records.length) || [];
+            if (this.bottomList.length > 0) {
+              // 循环bottomList和iconList，给每个bottomList添加icon
+              for (var i = 0; i < this.bottomList.length; i++) {
+                this.bottomList[i].icon = this.iconList[i];
+              }
+            }
+          });
+              this.isLoading = false;
         }
-      });
     }
   },
   components: {
     Card
   },
-  mounted() {
-    // this.createModel();
-    for (var i = 0; i < 100; i++) {
-      var x = Math.random() * 600 + 200;
-      var y = Math.random() * 600 + 200;
-      this.starList.push({ x, y });
-    }
-    window.particlesJS("particlesId", this.particleJson);
-    this.dishPageList();
-  }
+   mounted() {
+    //  for (var i = 0; i < 100; i++) {
+    //   var x = Math.random() * 600 + 200;
+    //   var y = Math.random() * 600 + 200;
+    //   this.starList.push({ x, y });
+    // }
+            
+      // window.location.reload();
+    // await this.dishPageList();window.location.reload();
+  },
+  created() {
+     window.particlesJS("particlesId", this.particleJson);
+      // this.dishPageList();
+      location.reload();
+  },
+  beforeRouteEnter(to, from, next) {
+  next(vm => {
+    vm.dishPageList()
+  })
+}
 };
 </script>
 

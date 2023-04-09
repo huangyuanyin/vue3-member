@@ -258,9 +258,9 @@ export default {
           this.loginLoading = false;
           // 登录
           if (res.code === 1) {
-            window.location.href = "/home";
             localStorage.setItem("token", res.data);
             localStorage.setItem("userInfo", JSON.stringify(jwt_decode(res.data)));
+            this.$router.push("/home");
           } else {
             this.$message.error(res.msg);
           }

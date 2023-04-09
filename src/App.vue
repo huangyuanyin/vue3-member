@@ -8,7 +8,7 @@
       <span class="page-title">
         {{ returnRouteName() }}
       </span>
-      <span class="to-home">
+      <span class="to-home" v-if="this.$route.path !== '/login'">
         <el-button size="small" type="text" @click="logout">退出登录</el-button>
       </span>
     </div>
@@ -33,9 +33,9 @@ export default {
         case '/map':
           return '区域数据归集'
         case '/home':
-          return '中航天智慧工地综合管理平台'
+          return '中航天智慧工地综合服务平台'
         case '/login':
-          return '中航天智慧工地综合管理平台'
+          return '中航天智慧工地综合服务平台'
       }
     },
     logout() {
