@@ -22,3 +22,11 @@ export function getMemberListApi(params) {
     params
   })
 }
+
+export function dishPage(params) {
+  return request({
+    url: '/dish/page',
+    method: 'get',
+    params
+  })
+}

@@ -78,75 +78,59 @@
 </template>
 
 <script>
-import { loginApi } from "@/api/user.js";
+import { loginApi } from '@/api/user.js'
 
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     return {
-      verifyCodeUrl: "",
+      verifyCodeUrl: '',
       timeInterval: null,
       // 表单
       formLogin: {
-        username: "admin",
-        password: "123456"
+        username: 'admin',
+        password: '123456'
         // captcha: ""
       },
       // 校验
       rules: {
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" }
+          { required: true, message: '请输入用户名', trigger: 'blur' }
         ],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }]
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
         // captcha: [{ required: true, message: "请输入验证码", trigger: "blur" }]
       },
       loginLoading: false
-    };
+    }
   },
   created() {
     // this.refreshCode();
-    document.addEventListener("keyup", this.enter);
+    document.addEventListener('keyup', this.enter)
   },
   methods: {
     // enter键盘事件
     enter(e) {
-      if (e.code === "Enter") {
-        this.submit();
+      if (e.code === 'Enter') {
+        this.submit()
       }
     },
     // 刷新验证码
-    refreshCode() {
-      getVerifyCode().then(response => {
-        if (response.status === 200) {
-          this.verifyCodeUrl =
-            "data:image/png;base64," +
-            btoa(
-              new Uint8Array(response.data).reduce(
-                (data, byte) => data + String.fromCharCode(byte),
-                ""
-              )
-            );
-          // this.formLogin.captcha = "";
-        } else {
-          this.$message({ type: "danger", content: "验证码请求错误" });
-        }
-      });
-    },
+    refreshCode() {},
     // 提交登录信息
     submit() {
       this.$refs.loginForm.validate(async valid => {
         // valid = true;
         if (valid) {
-          this.loginLoading = true;
-          let res = await loginApi(this.formLogin);
-          this.loginLoading = false;
+          this.loginLoading = true
+          let res = await loginApi(this.formLogin)
+          this.loginLoading = false
           // 登录
           if (res.code === 1) {
-            this.$router.push("/home");
-            localStorage.setItem("token", "111");
-            localStorage.setItem("userInfo", JSON.stringify(res.data));
+            this.$router.push('/home')
+            localStorage.setItem('token', JSON.stringify(res.data))
+            localStorage.setItem('userInfo', JSON.stringify(res.data))
           } else {
-            this.$message.error(res.msg);
+            this.$message.error(res.msg)
           }
           // loginApi(this.formLogin)
           //   .then(res => this.loginSuccess(res))
@@ -155,37 +139,37 @@ export default {
           // 登录表单校验失败
           // this.$message({ type: "danger", content: "请输入登录信息后登录" });
         }
-      });
+      })
     },
     loginSuccess(res) {
-      if (res.data.code === "0") {
-        const token = res.data.data;
-        this.$store.dispatch("setToken", token).then(() => {
+      if (res.data.code === '0') {
+        const token = res.data.data
+        this.$store.dispatch('setToken', token).then(() => {
           // 重定向对象不存在则返回顶层路径
-          this.$router.push("/");
-        });
+          this.$router.push('/')
+        })
       } else {
-        this.$message({ content: res.data.message, type: "danger" });
-        this.refreshCode();
+        this.$message({ content: res.data.message, type: 'danger' })
+        this.refreshCode()
       }
-      this.loginLoading = false;
+      this.loginLoading = false
     },
     // 登录失败
     requestFailed(err) {
-      this.loginLoading = false;
-      this.refreshCode();
+      this.loginLoading = false
+      this.refreshCode()
       this.$message({
-        type: "danger",
+        type: 'danger',
         content:
           ((err.response || {}).data || {}).message ||
-          "请求出现错误，请稍后再试"
-      });
+          '请求出现错误，请稍后再试'
+      })
     }
   },
   beforeDestroy() {
-    document.removeEventListener("keyup", this.enter);
+    document.removeEventListener('keyup', this.enter)
   }
-};
+}
 </script>
 
 <style>

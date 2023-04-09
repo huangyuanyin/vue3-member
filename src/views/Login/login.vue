@@ -9,164 +9,63 @@
       ></canvas>
     </div>
     <div class="bg-wrapper">
-      <div
-        class="container"
-        v-if="counts >= 1"
-        @click="toLink(tableData[0].url)"
-      >
-        <!-- <div class="background-img"> -->
-        <div class="box" style="top:30%;left: 25%;">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <div class="content">
-            <svg-icon
-              iconName="icon-jiankong3"
-              size="30"
-              className="aaa"
-            ></svg-icon>
-            <div class="content-div">{{ tableData[0].name }}</div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="container"
-        v-if="counts >= 2"
-        @click="toLink(tableData[1].url)"
-      >
-        <!-- <div class="background-img"> -->
-        <div class="box" style="top:30%;left: 50%;">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <div class="content">
-            <svg-icon
-              iconName="icon-jiankong3"
-              size="30"
-              className="aaa"
-            ></svg-icon>
-            <div class="content-div">{{ tableData[1].name }}</div>
-            <!-- <p>
-              <a
-                >All our modules are designed to play nicely with responsive of
-                course. At the end of the day it comes down to the theme you use
-                - our code doesn't get in your way.</a
+      <div class="layer">
+        <div class="content" flex="dir:top main:center cross:center">
+          <div class="form">
+            <div class="title">登录页面</div>
+            <b-form
+              ref="loginForm"
+              label-position="top"
+              :rules="rules"
+              :model="formLogin"
+              size="default"
+            >
+              <b-form-item prop="username">
+                <b-input
+                  type="text"
+                  v-model="formLogin.username"
+                  placeholder="请输入用户名"
+                  prefix="ios-contact"
+                ></b-input>
+              </b-form-item>
+              <b-form-item prop="password">
+                <b-input
+                  type="password"
+                  v-model="formLogin.password"
+                  placeholder="请输入密码"
+                  prefix="ios-key"
+                ></b-input>
+              </b-form-item>
+              <!-- <b-form-item prop="captcha">
+              <b-input
+                type="text"
+                v-model="formLogin.captcha"
+                placeholder="- - - -"
+                style="width: 60%;"
+                prefix="ios-bulb"
+              ></b-input>
+              <span class="login-code" @click="refreshCode" title="点击刷新">
+                <img :src="verifyCodeUrl" alt="code" />
+              </span>
+            </b-form-item> -->
+              <b-button
+                @click="submit"
+                type="primary"
+                class="button-login"
+                v-waves
+                :loading="loginLoading"
               >
-            </p> -->
+                {{ loginLoading ? "登录中..." : "登 录" }}
+              </b-button>
+            </b-form>
           </div>
-        </div>
-      </div>
-      <div
-        class="container"
-        v-if="counts >= 3"
-        @click="toLink(tableData[2].url)"
-      >
-        <!-- <div class="background-img"> -->
-        <div class="box" style="top:30%;left: 75%;">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <div class="content">
-            <svg-icon
-              iconName="icon-jiankong3"
-              size="30"
-              className="aaa"
-            ></svg-icon>
-            <div class="content-div">{{ tableData[2].name }}</div>
-          </div>
-        </div>
-      </div>
-      <div class="container" v-if="counts >= 4" @click="toLink(tableData[3])">
-        <!-- <div class="background-img"> -->
-        <div class="box" style="top:55%;left: 25%;">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <div class="content">
-            <svg-icon
-              iconName="icon-jiankong3"
-              size="30"
-              className="aaa"
-            ></svg-icon>
-            <div class="content-div">{{ tableData[3].name }}</div>
-            <!-- <p>
-              <a
-                >All our modules are designed to play nicely with responsive of
-                course. At the end of the day it comes down to the theme you use
-                - our code doesn't get in your way.</a
-              >
-            </p> -->
-          </div>
-        </div>
-      </div>
-      <div class="container" v-if="counts >= 5" @click="toLink(tableData[4])">
-        <!-- <div class="background-img"> -->
-        <div class="box" style="top:55%;left: 50%;">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <div class="content">
-            <svg-icon
-              iconName="icon-jiankong3"
-              size="30"
-              className="aaa"
-            ></svg-icon>
-            <div class="content-div">{{ tableData[4].name }}</div>
-            <!-- <p>
-              <a
-                >All our modules are designed to play nicely with responsive of
-                course. At the end of the day it comes down to the theme you use
-                - our code doesn't get in your way.</a
-              >
-            </p> -->
-          </div>
-        </div>
-      </div>
-      <div class="container" v-if="counts >= 6" @click="toLink(tableData[5])">
-        <!-- <div class="background-img"> -->
-        <div class="box" style="top:55%;left: 75%;">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <div class="content">
-            <svg-icon
-              iconName="icon-jiankong3"
-              size="30"
-              className="aaa"
-            ></svg-icon>
-            <div class="content-div">{{ tableData[5].name }}</div>
-            <!-- <p>
-              <a
-                >All our modules are designed to play nicely with responsive of
-                course. At the end of the day it comes down to the theme you use
-                - our code doesn't get in your way.</a
-              >
-            </p> -->
-          </div>
-        </div>
-      </div>
-      <div class="bottom-container">
-        <div
-          class="item"
-          v-for="(item, index) in bottomList"
-          :key="'bottomList' + index"
-          @click="toLink(item.url)"
-        >
-          <svg-icon :iconName="item.icon" size="30" className="aaa"></svg-icon>
-          <p>{{ item.name }}</p>
         </div>
       </div>
     </div>
     <div class="earth-wrapper">
       <div class="light">
         <div class="rotate">
-          <img src="../../../assets/images/home-example/earth2.png" alt="" />
+          <img src="../../assets/images/home-example/earth2.png" alt="" />
           <!--<div class="star" v-for="(item,index) in starList"
                :style="{top:item.y+'px',left:item.x+'px',animationDelay:parseInt(index%8) + 's'}"></div>-->
         </div>
@@ -179,18 +78,32 @@
     </div> -->
   </div>
 </template>
-<script>
+<script lang="js">
 import particles from 'particles.js'
 import * as Three from 'three'
-import Card from './Card.vue'
-import { dishPage } from '@/api/user'
+import Card from '@/components/Card/Card.vue'
+import jwt_decode from 'jwt-decode'
+import { dishPage, loginApi } from '@/api/user'
+
 /* eslint-disable */
 export default {
   name: "Home",
   data: function() {
     return {
-      tableData: [],
-      counts: 0,
+      formLogin: {
+        username: "admin",
+        password: "123456"
+        // captcha: ""
+      },
+      // 校验
+      rules: {
+        username: [
+          { required: true, message: "请输入用户名", trigger: "blur" }
+        ],
+        password: [{ required: true, message: "请输入密码", trigger: "blur" }]
+        // captcha: [{ required: true, message: "请输入验证码", trigger: "blur" }]
+      },
+      loginLoading: false,
       particleJson: {
         particles: {
           number: {
@@ -311,46 +224,55 @@ export default {
         { x: 780, y: 500 },
         { x: 680, y: 640 }
       ],
-      bottomList: [],
-      iconList: [
-        "icon-jiankong3",
-        "icon-jishufuwu",
-        "icon-fuwudiqiu",
-        "icon-fuwuliu",
-        "icon-fuwu_o",
-        "icon-fuwu1",
-        "icon-fuwuqi",
-        "icon-yunjiankong",
-        "icon-jiankong",
-        "icon-jiankong3"
+      bottomList: [
+        { icon: "icon-jiankong3", name: "建科研" },
+        { icon: "icon-jishufuwu", name: "建科研" },
+        { icon: "icon-fuwudiqiu", name: "建科研" },
+        { icon: "icon-fuwuliu", name: "建科研" },
+        { icon: "icon-fuwu_o", name: "建科研" },
+        { icon: "icon-fuwu1", name: "建科研" },
+        { icon: "icon-fuwuqi", name: "建科研" },
+        { icon: "icon-yunjiankong", name: "建科研" },
+        { icon: "icon-jiankong", name: "建科研" },
+        { icon: "icon-jiankong3", name: "建科研" }
       ]
     };
   },
   methods: {
-    toLink(it) {
-      // 如果it是http开头的，就直接打开，否则就加上http://
-      if (it.indexOf("http") == -1) {
-        it = "http://" + it;
-      }
-      window.open(it, "_blank");
+    toLink() {
+      window.open("https://www.baidu.com");
     },
-    dishPageList() {
-      dishPage({
-        page: 1,
-        pageSize: 10
-      }).then(res => {
-        this.tableData = res.data.records || [];
-        this.counts = res.data.total;
-        // 取第七个到最后一个的数据
-        this.bottomList = this.tableData.slice(6, this.tableData.length) || [];
-        if (this.bottomList.length > 0) {
-          // 循环bottomList和iconList，给每个bottomList添加icon
-          for (var i = 0; i < this.bottomList.length; i++) {
-            this.bottomList[i].icon = this.iconList[i];
+    // enter键盘事件
+    enter(e) {
+      if (e.code === "Enter") {
+        this.submit();
+      }
+    },
+    // 提交登录信息
+    submit() {
+      this.$refs.loginForm.validate(async valid => {
+        // valid = true;
+        if (valid) {
+          this.loginLoading = true;
+          let res = await loginApi(this.formLogin);
+          this.loginLoading = false;
+          // 登录
+          if (res.code === 1) {
+            window.location.href = "/home";
+            localStorage.setItem("token", res.data);
+            localStorage.setItem("userInfo", JSON.stringify(jwt_decode(res.data)));
+          } else {
+            this.$message.error(res.msg);
           }
+          // loginApi(this.formLogin)
+          //   .then(res => this.loginSuccess(res))
+          //   .catch(err => this.requestFailed(err));
+        } else {
+          // 登录表单校验失败
+          // this.$message({ type: "danger", content: "请输入登录信息后登录" });
         }
       });
-    }
+    },
   },
   components: {
     Card
@@ -363,7 +285,10 @@ export default {
       this.starList.push({ x, y });
     }
     window.particlesJS("particlesId", this.particleJson);
-    this.dishPageList();
+    document.addEventListener("keyup", this.enter);
+  },
+  beforeDestroy() {
+    document.removeEventListener("keyup", this.enter);
   }
 };
 </script>
@@ -387,7 +312,7 @@ export default {
   position: relative;
 }
 
-.content div {
+.content h2 {
   font-size: 19px;
 }
 
@@ -669,12 +594,68 @@ canvas
   75% {opacity:0.1}
   100% {opacity:0}
 }*/
+</style>
 
-.content-div{
-  font-size 14px;
-    overflow  hidden;
-    text-overflow ellipsis;
-    white-space nowrap;
-    width: 100px;
-}
+<style lang="stylus">
+.layer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: auto;
+  }
+  .content {
+    height: 100%;
+    min-height: 500px;
+    // 登录表单
+
+    .form {
+      position: relative;
+      width: 400px;
+      padding: 60px 40px 40px;
+      background: #fff;
+      border-radius: 5px;
+      box-sizing: border-box;
+
+      .title {
+        position: absolute;
+        top: 0;
+        left: 60px;
+        margin-top: -24px;
+        background: url("../../assets/images/title-bg.png") no-repeat 0 0;
+        width 280px;
+        height: 48px;
+        line-height: 48px;
+        background-size: 100% 100%
+        text-align: center;
+        color: #fff;
+        font-size: 20px;
+        font-family: '宋体';
+      }
+
+      // 登录按钮
+
+      .button-login {
+        width: 100%;
+      }
+
+      .login-code {
+        display: inline-block;
+        vertical-align: middle;
+        width: 40%;
+        padding-left: 10px;
+        height: 36px;
+        overflow: hidden;
+        cursor: pointer;
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 5px;
+          border: 1px solid #dcdee2;
+        }
+      }
+    }
+  }
 </style>
