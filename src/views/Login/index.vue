@@ -115,46 +115,23 @@ export default {
       }
     },
     // 刷新验证码
-    refreshCode() {
-      getVerifyCode().then(response => {
-        if (response.status === 200) {
-          this.verifyCodeUrl =
-            "data:image/png;base64," +
-            btoa(
-              new Uint8Array(response.data).reduce(
-                (data, byte) => data + String.fromCharCode(byte),
-                ""
-              )
-            );
-          // this.formLogin.captcha = "";
-        } else {
-          this.$message({ type: "danger", content: "验证码请求错误" });
-        }
-      });
-    },
+    refreshCode() {},
     // 提交登录信息
     submit() {
       this.$refs.loginForm.validate(async valid => {
         // valid = true;
         if (valid) {
           this.loginLoading = true;
-          loginApi(this.formLogin)
-            .then(res => {
-              this.loginLoading = false;
-              // 登录
-              if (res.code === 1) {
-                this.$router.push("/home");
-                localStorage.setItem("token", "111");
-                localStorage.setItem("userInfo", JSON.stringify(res.data));
-              } else {
-                this.$message.error(res.msg);
-              }
-            })
-            .catch(err => {
-              this.loginLoading = false;
-              this.$message.error(err);
-            });
-
+          let res = await loginApi(this.formLogin);
+          this.loginLoading = false;
+          // 登录
+          if (res.code === 1) {
+            this.$router.push("/home");
+            localStorage.setItem("token", JSON.stringify(res.data));
+            localStorage.setItem("userInfo", JSON.stringify(res.data));
+          } else {
+            this.$message.error(res.msg);
+          }
           // loginApi(this.formLogin)
           //   .then(res => this.loginSuccess(res))
           //   .catch(err => this.requestFailed(err));

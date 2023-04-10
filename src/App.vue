@@ -1,13 +1,14 @@
 <template>
   <div id="app" v-cloak>
-    <div
+    <!-- <div
       v-if="this.$route.path !== '/home2' && this.$route.path !== '/login'"
       class="page-title-wrapper"
-    >
+    > -->
+    <div v-if="this.$route.path !== '/home2'" class="page-title-wrapper">
       <span class="page-title">
         {{ returnRouteName() }}
       </span>
-      <span class="to-home">
+      <span class="to-home" v-if="this.$route.path !== '/login'">
         <el-button size="small" type="text" @click="logout">退出登录</el-button>
       </span>
     </div>
@@ -16,31 +17,33 @@
 </template>
 <script>
 export default {
-  name: "app",
+  name: 'app',
   methods: {
     returnRouteName() {
-      let route = this.$route.path;
+      let route = this.$route.path
       switch (route) {
-        case "/overview":
-          return "系统概况专题111";
-        case "/summary":
-          return "数据归集专题";
-        case "/public":
-          return "双公示专题";
-        case "/union":
-          return "联合奖惩专题";
-        case "/map":
-          return "区域数据归集";
-        case "/home":
-          return "中航天智慧工地综合管理平台";
+        case '/overview':
+          return '系统概况专题111'
+        case '/summary':
+          return '数据归集专题'
+        case '/public':
+          return '双公示专题'
+        case '/union':
+          return '联合奖惩专题'
+        case '/map':
+          return '区域数据归集'
+        case '/home':
+          return '中航天智慧工地综合服务平台'
+        case '/login':
+          return '中航天智慧工地综合服务平台'
       }
     },
     logout() {
-      localStorage.clear();
-      this.$router.push("/login");
+      localStorage.clear()
+      this.$router.push('/login')
     }
   }
-};
+}
 </script>
 
 <style>

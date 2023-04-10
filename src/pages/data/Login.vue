@@ -27,7 +27,7 @@ export default {
           let res = await loginApi(this.loginForm)
           if (res.code === 1) {
             this.$router.push('/home')
-            localStorage.setItem('token', '111')
+            localStorage.setItem('token', JSON.stringify(res.data))
             localStorage.setItem('userInfo', JSON.stringify(res.data))
           } else {
             this.$message.error(res.msg)

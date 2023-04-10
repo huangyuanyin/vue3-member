@@ -9,11 +9,11 @@ import Union from '../pages/data/union/Union.vue'
 // import Map from '../pages/data/map/Map.vue'
 
 export const constantRouterMap = [
-  {
-    path: '/',
-    component: Home,
-    redirect: { name: 'Home' }
-  },
+  // {
+  //   path: '/',
+  //   component: Home,
+  //   redirect: { name: 'Home' }
+  // },
   // {
   //   path: '/',
   //   component: Home2,
