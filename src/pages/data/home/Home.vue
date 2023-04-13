@@ -80,7 +80,11 @@
           </div>
         </div>
       </div>
-      <div class="container" v-if="counts >= 4" @click="toLink(tableData[3])">
+      <div
+        class="container"
+        v-if="counts >= 4"
+        @click="toLink(tableData[3].url)"
+      >
         <!-- <div class="background-img"> -->
         <div class="box" style="top:55%;left: 25%;">
           <span></span>
@@ -104,7 +108,11 @@
           </div>
         </div>
       </div>
-      <div class="container" v-if="counts >= 5" @click="toLink(tableData[4])">
+      <div
+        class="container"
+        v-if="counts >= 5"
+        @click="toLink(tableData[4].url)"
+      >
         <!-- <div class="background-img"> -->
         <div class="box" style="top:55%;left: 50%;">
           <span></span>
@@ -128,7 +136,11 @@
           </div>
         </div>
       </div>
-      <div class="container" v-if="counts >= 6" @click="toLink(tableData[5])">
+      <div
+        class="container"
+        v-if="counts >= 6"
+        @click="toLink(tableData[5].url)"
+      >
         <!-- <div class="background-img"> -->
         <div class="box" style="top:55%;left: 75%;">
           <span></span>
