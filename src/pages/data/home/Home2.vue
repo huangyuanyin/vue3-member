@@ -1,12 +1,7 @@
 <template>
   <div class="home">
     <div class="particles-wrapper" id="particlesId">
-      <canvas
-        class="particles-js-canvas-el"
-        width="1560"
-        height="560"
-        style="width: 100%; height: 100%;"
-      ></canvas>
+      <canvas class="particles-js-canvas-el" width="1560" height="560" style="width: 100%; height: 100%;"></canvas>
     </div>
     <div class="position-center">
       <div class="title-wrapper">
@@ -38,7 +33,7 @@
 import particles from "particles.js";
 export default {
   name: "Home",
-  data: function() {
+  data: function () {
     return {
       particleJson: {
         particles: {

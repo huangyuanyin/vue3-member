@@ -1,20 +1,11 @@
 <template>
   <div class="home">
     <div class="particles-wrapper" id="particlesId">
-      <canvas
-        class="particles-js-canvas-el"
-        width="1560"
-        height="560"
-        style="width: 100%; height: 100%"
-      ></canvas>
+      <canvas class="particles-js-canvas-el" width="1560" height="560" style="width: 100%; height: 100%"></canvas>
     </div>
     <div v-if="isLoading">数据加载中....</div>
     <div class="bg-wrapper" v-else>
-      <div
-        class="container"
-        v-if="counts >= 1"
-        @click="toLink(tableData[0].url)"
-      >
+      <div class="container" v-if="counts >= 1" @click="toLink(tableData[0].url)">
         <!-- <div class="background-img"> -->
         <div class="box" style="top:30%;left: 25%;">
           <span></span>
@@ -22,20 +13,12 @@
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon
-              iconName="icon-jiankong3"
-              size="30"
-              className="aaa"
-            ></svg-icon>
+            <svg-icon iconName="icon-yunjiankong" size="30" className="aaa"></svg-icon>
             <div class="content-div">{{ tableData[0].name }}</div>
           </div>
         </div>
       </div>
-      <div
-        class="container"
-        v-if="counts >= 2"
-        @click="toLink(tableData[1].url)"
-      >
+      <div class="container" v-if="counts >= 2" @click="toLink(tableData[1].url)">
         <!-- <div class="background-img"> -->
         <div class="box" style="top:30%;left: 50%;">
           <span></span>
@@ -43,11 +26,7 @@
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon
-              iconName="icon-jiankong3"
-              size="30"
-              className="aaa"
-            ></svg-icon>
+            <svg-icon iconName="icon-jiankong2" size="30" className="aaa"></svg-icon>
             <div class="content-div">{{ tableData[1].name }}</div>
             <!-- <p>
               <a
@@ -59,11 +38,7 @@
           </div>
         </div>
       </div>
-      <div
-        class="container"
-        v-if="counts >= 3"
-        @click="toLink(tableData[2].url)"
-      >
+      <div class="container" v-if="counts >= 3" @click="toLink(tableData[2].url)">
         <!-- <div class="background-img"> -->
         <div class="box" style="top:30%;left: 75%;">
           <span></span>
@@ -71,20 +46,12 @@
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon
-              iconName="icon-jiankong3"
-              size="30"
-              className="aaa"
-            ></svg-icon>
+            <svg-icon iconName="icon-jiankong1" size="30" className="aaa"></svg-icon>
             <div class="content-div">{{ tableData[2].name }}</div>
           </div>
         </div>
       </div>
-      <div
-        class="container"
-        v-if="counts >= 4"
-        @click="toLink(tableData[3].url)"
-      >
+      <div class="container" v-if="counts >= 4" @click="toLink(tableData[3].url)">
         <!-- <div class="background-img"> -->
         <div class="box" style="top:55%;left: 25%;">
           <span></span>
@@ -92,11 +59,7 @@
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon
-              iconName="icon-jiankong3"
-              size="30"
-              className="aaa"
-            ></svg-icon>
+            <svg-icon iconName="icon-jiankong" size="30" className="aaa"></svg-icon>
             <div class="content-div">{{ tableData[3].name }}</div>
             <!-- <p>
               <a
@@ -108,11 +71,7 @@
           </div>
         </div>
       </div>
-      <div
-        class="container"
-        v-if="counts >= 5"
-        @click="toLink(tableData[4].url)"
-      >
+      <div class="container" v-if="counts >= 5" @click="toLink(tableData[4].url)">
         <!-- <div class="background-img"> -->
         <div class="box" style="top:55%;left: 50%;">
           <span></span>
@@ -120,11 +79,7 @@
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon
-              iconName="icon-jiankong3"
-              size="30"
-              className="aaa"
-            ></svg-icon>
+            <svg-icon iconName="icon-yunjiankong" size="30" className="aaa"></svg-icon>
             <div class="content-div">{{ tableData[4].name }}</div>
             <!-- <p>
               <a
@@ -136,11 +91,7 @@
           </div>
         </div>
       </div>
-      <div
-        class="container"
-        v-if="counts >= 6"
-        @click="toLink(tableData[5].url)"
-      >
+      <div class="container" v-if="counts >= 6" @click="toLink(tableData[5].url)">
         <!-- <div class="background-img"> -->
         <div class="box" style="top:55%;left: 75%;">
           <span></span>
@@ -148,11 +99,7 @@
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon
-              iconName="icon-jiankong3"
-              size="30"
-              className="aaa"
-            ></svg-icon>
+            <svg-icon iconName="icon-jiankong3" size="30" className="aaa"></svg-icon>
             <div class="content-div">{{ tableData[5].name }}</div>
             <!-- <p>
               <a
@@ -165,14 +112,19 @@
         </div>
       </div>
       <div class="bottom-container">
-        <div
-          class="item"
-          v-for="(item, index) in bottomList"
-          :key="'bottomList' + index"
-          @click="toLink(item.url)"
-        >
+        <div class="item" v-for="(item, index) in bottomList" :key="'bottomList' + index" @click="toLink(item.url)">
           <svg-icon :iconName="item.icon" size="30" className="aaa"></svg-icon>
           <p>{{ item.name }}</p>
+        </div>
+      </div>
+      <div class="backImg">
+        <div style="margin-right: 20px;">
+          <img style="width:110px;height:76px" src="@/assets/images/2323.gif" alt="">
+        </div>
+        <div class="backwrap">
+          <span>Copyright©2016版权所有 中国航天科工集团公司 备案序号:京ICP备05067351号</span>
+          <span>制作单位：中航天建设工程集团有限公司 地址：北市市丰台区看丹路4号院甲6号 邮编：100070 联系电话：(010)83680501</span>
+          <span>欢迎关注官方微信公众号：casic-ZHT</span>
         </div>
       </div>
     </div>
@@ -200,7 +152,7 @@ import { dishPage } from "@/api/user";
 /* eslint-disable */
 export default {
   name: "Home",
-  data: function() {
+  data: function () {
     return {
       tableData: [],
       counts: 0,
@@ -403,6 +355,7 @@ export default {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+
 .background-img {
   background-image: url("https://3.bp.blogspot.com/-piZWCW2uUbg/W2fPXxkWZgI/AAAAAAAAOu0/eydmMjTIqcwLMHEEr2H7imqoRTxMw4o9QCLcBGAs/s1600/among_trees_night_dribbble.png");
   height: 400px;
@@ -430,6 +383,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
 .item {
   display: flex;
   flex-direction: column;
@@ -438,9 +392,11 @@ export default {
   margin: 0 60px;
   cursor: pointer;
 }
+
 .item .aaa {
   font-size: 36px;
 }
+
 .item p {
   color: #4edad6;
   font-size: 20px;
@@ -506,6 +462,7 @@ export default {
   display: block;
   box-sizing: border-box;
 }
+
 .aaa {
   font-size: 30px;
   margin-bottom: 10px;
@@ -541,10 +498,12 @@ export default {
     transform: scaleX(0);
     transform-origin: left;
   }
+
   50% {
     transform: scaleX(1);
     transform-origin: left;
   }
+
   50.1% {
     transform: scaleX(1);
     transform-origin: right;
@@ -706,5 +665,25 @@ canvas
     text-overflow ellipsis;
     white-space nowrap;
     width: 100px;
+}
+
+.backImg{
+  width: 100%;
+  position absolute;
+  bottom: 20px;
+  left 5%
+  display flex;
+  justify-content center;
+  align-items center;
+
+}
+.backwrap{
+  display flex;
+  flex-direction column;
+  justify-content center;
+  align-items left;
+  color:#5eacf5; 
+  font-size:14px; 
+  line-height:30px;
 }
 </style>
