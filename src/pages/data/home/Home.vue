@@ -1,32 +1,86 @@
 <template>
   <div class="home">
     <div class="particles-wrapper" id="particlesId">
-      <canvas class="particles-js-canvas-el" width="1560" height="560" style="width: 100%; height: 100%"></canvas>
+      <canvas
+        class="particles-js-canvas-el"
+        width="1560"
+        height="560"
+        style="width: 100%; height: 100%"
+      ></canvas>
     </div>
     <div v-if="isLoading">数据加载中....</div>
     <div class="bg-wrapper" v-else>
-      <div class="container" v-if="counts >= 1" @click="toLink(tableData[0].url)">
+      <!-- <img src="@/assets/images/123123.jpeg" alt="" style="width: 1000px" />
+      <img src="@/assets/images/124124.jpeg" alt="" style="width: 1000px" />
+      <img src="@/assets/images/125125.jpeg" alt="" style="width: 1000px" />
+      <img src="@/assets/images/126126.jpeg" alt="" style="width: 1000px" /> -->
+      <slider
+        animation="fade"
+        width="100vw"
+        height="30vh"
+        style="margin: 0 auto"
+      >
+        <slider-item v-for="(i, index) in list" :key="index">
+          <img :src="i" style="width: 100%" />
+        </slider-item>
+      </slider>
+      <!-- <div class="banner-container clearfix">
+        <div class="banner-image-container">
+          <img src="@/assets/images/123123.jpeg" alt="" />
+          <img src="@/assets/images/124124.jpeg" alt="" />
+          <img src="@/assets/images/125125.jpeg" alt="" />
+          <img src="@/assets/images/126126.jpeg" alt="" />
+          <img src="@/assets/images/124124.jpeg" alt="" />
+        </div>
+      </div> -->
+      <!-- <div class="slideshow-container">
+        <img
+          style="width: 100%; height: 30vh; margin-top: 1px"
+          src="@/assets/images/123123.jpeg"
+        />
+        <img
+          style="width: 100%; height: 30vh; margin-top: 1px"
+          src="@/assets/images/124124.jpeg"
+        />
+      </div> -->
+      <div
+        class="container"
+        v-if="counts >= 1"
+        @click="toLink(tableData[0].url)"
+      >
         <!-- <div class="background-img"> -->
-        <div class="box" style="top:30%;left: 25%;">
+        <div class="box" style="top: 45%; left: 25%">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon iconName="icon-yunjiankong" size="30" className="aaa"></svg-icon>
+            <svg-icon
+              iconName="icon-yunjiankong"
+              size="30"
+              className="aaa"
+            ></svg-icon>
             <div class="content-div">{{ tableData[0].name }}</div>
           </div>
         </div>
       </div>
-      <div class="container" v-if="counts >= 2" @click="toLink(tableData[1].url)">
+      <div
+        class="container"
+        v-if="counts >= 2"
+        @click="toLink(tableData[1].url)"
+      >
         <!-- <div class="background-img"> -->
-        <div class="box" style="top:30%;left: 50%;">
+        <div class="box" style="top: 45%; left: 50%">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon iconName="icon-jiankong2" size="30" className="aaa"></svg-icon>
+            <svg-icon
+              iconName="icon-jiankong2"
+              size="30"
+              className="aaa"
+            ></svg-icon>
             <div class="content-div">{{ tableData[1].name }}</div>
             <!-- <p>
               <a
@@ -38,28 +92,44 @@
           </div>
         </div>
       </div>
-      <div class="container" v-if="counts >= 3" @click="toLink(tableData[2].url)">
+      <div
+        class="container"
+        v-if="counts >= 3"
+        @click="toLink(tableData[2].url)"
+      >
         <!-- <div class="background-img"> -->
-        <div class="box" style="top:30%;left: 75%;">
+        <div class="box" style="top: 45%; left: 75%">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon iconName="icon-jiankong1" size="30" className="aaa"></svg-icon>
+            <svg-icon
+              iconName="icon-jiankong1"
+              size="30"
+              className="aaa"
+            ></svg-icon>
             <div class="content-div">{{ tableData[2].name }}</div>
           </div>
         </div>
       </div>
-      <div class="container" v-if="counts >= 4" @click="toLink(tableData[3].url)">
+      <div
+        class="container"
+        v-if="counts >= 4"
+        @click="toLink(tableData[3].url)"
+      >
         <!-- <div class="background-img"> -->
-        <div class="box" style="top:55%;left: 25%;">
+        <div class="box" style="top: 65%; left: 25%">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon iconName="icon-jiankong" size="30" className="aaa"></svg-icon>
+            <svg-icon
+              iconName="icon-jiankong"
+              size="30"
+              className="aaa"
+            ></svg-icon>
             <div class="content-div">{{ tableData[3].name }}</div>
             <!-- <p>
               <a
@@ -71,15 +141,23 @@
           </div>
         </div>
       </div>
-      <div class="container" v-if="counts >= 5" @click="toLink(tableData[4].url)">
+      <div
+        class="container"
+        v-if="counts >= 5"
+        @click="toLink(tableData[4].url)"
+      >
         <!-- <div class="background-img"> -->
-        <div class="box" style="top:55%;left: 50%;">
+        <div class="box" style="top: 65%; left: 50%">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon iconName="icon-yunjiankong" size="30" className="aaa"></svg-icon>
+            <svg-icon
+              iconName="icon-yunjiankong"
+              size="30"
+              className="aaa"
+            ></svg-icon>
             <div class="content-div">{{ tableData[4].name }}</div>
             <!-- <p>
               <a
@@ -91,15 +169,23 @@
           </div>
         </div>
       </div>
-      <div class="container" v-if="counts >= 6" @click="toLink(tableData[5].url)">
+      <div
+        class="container"
+        v-if="counts >= 6"
+        @click="toLink(tableData[5].url)"
+      >
         <!-- <div class="background-img"> -->
-        <div class="box" style="top:55%;left: 75%;">
+        <div class="box" style="top: 65%; left: 75%">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon iconName="icon-jiankong3" size="30" className="aaa"></svg-icon>
+            <svg-icon
+              iconName="icon-jiankong3"
+              size="30"
+              className="aaa"
+            ></svg-icon>
             <div class="content-div">{{ tableData[5].name }}</div>
             <!-- <p>
               <a
@@ -112,18 +198,31 @@
         </div>
       </div>
       <div class="bottom-container">
-        <div class="item" v-for="(item, index) in bottomList" :key="'bottomList' + index" @click="toLink(item.url)">
+        <div
+          class="item"
+          v-for="(item, index) in bottomList"
+          :key="'bottomList' + index"
+          @click="toLink(item.url)"
+        >
           <svg-icon :iconName="item.icon" size="30" className="aaa"></svg-icon>
           <p>{{ item.name }}</p>
         </div>
       </div>
       <div class="backImg">
-        <div style="margin-right: 20px;">
-          <img style="width:110px;height:76px" src="@/assets/images/2323.gif" alt="">
+        <div style="margin-right: 20px">
+          <img
+            style="width: 110px; height: 76px"
+            src="@/assets/images/2323.gif"
+            alt=""
+          />
         </div>
         <div class="backwrap">
-          <span>Copyright©2016版权所有 中国航天科工集团公司 备案序号:京ICP备05067351号</span>
-          <span>制作单位：中航天建设工程集团有限公司 地址：北市市丰台区看丹路4号院甲6号 邮编：100070 联系电话：(010)83680501</span>
+          <span>Copyright©中国航天科工集团公司 中航天智慧工地综合服务平台</span>
+          <span
+            >制作单位：中航天建设工程集团有限公司
+            地址：北市市丰台区看丹路4号院甲6号 邮编：100070
+            联系电话：(010)83680501</span
+          >
           <span>欢迎关注官方微信公众号：casic-ZHT</span>
         </div>
       </div>
@@ -154,6 +253,13 @@ export default {
   name: "Home",
   data: function () {
     return {
+      list: [
+        "http://101.43.127.118:7000/static/img/123123.eadb247e.jpeg",
+        "http://101.43.127.118:7000/static/img/124124.c9e67c55.jpeg",
+        "http://101.43.127.118:7000/static/img/125125.68d0c429.jpeg",
+        "http://101.43.127.118:7000/static/img/126126.4e601130.jpeg",
+      ],
+      slideIndex: 0,
       tableData: [],
       counts: 0,
       isLoading: false,
@@ -163,26 +269,26 @@ export default {
             value: 60, // 数量
             density: {
               enable: true, // 启用粒子的稀密程度
-              value_area: 800 // 区域散布密度大小
-            }
+              value_area: 800, // 区域散布密度大小
+            },
           },
           color: {
-            value: "#00aeff" // 原子的颜色
+            value: "#00aeff", // 原子的颜色
           },
           shape: {
             type: "circle", // 原子的形状 "circle" ,"edge" ,"triangle" ,"polygon" ,"star" ,"image" ,["circle", "triangle", "image"]
             stroke: {
               width: 0, // 原子的宽度
-              color: "#362cff" // 原子颜色
+              color: "#362cff", // 原子颜色
             },
             polygon: {
-              nb_sides: 5 // 原子的多边形边数
+              nb_sides: 5, // 原子的多边形边数
             },
             image: {
               src: "img/github.svg", // 原子的图片可以使用自定义图片 "assets/img/yop.svg" , "http://mywebsite.com/assets/img/yop.png"
               width: 100, // 图片宽度
-              height: 100 // 图片高度
-            }
+              height: 100, // 图片高度
+            },
           },
           opacity: {
             value: 1, // 不透明度
@@ -191,8 +297,8 @@ export default {
               enable: true, // 渐变动画
               speed: 1, // 渐变动画速度
               opacity_min: 0, // 渐变动画不透明度
-              sync: true
-            }
+              sync: true,
+            },
           },
           size: {
             value: 3, // 原子大小
@@ -201,15 +307,15 @@ export default {
               enable: false, // 原子渐变
               speed: 4, // 原子渐变速度
               size_min: 0.3,
-              sync: false
-            }
+              sync: false,
+            },
           },
           line_linked: {
             enable: false, // 连接线
             distance: 150, // 连接线距离
             color: "transparent", // 连接线颜色
             opacity: 0.4, // 连接线不透明度
-            width: 1 // 连接线的宽度
+            width: 1, // 连接线的宽度
           },
           move: {
             enable: true, // 原子移动
@@ -222,50 +328,50 @@ export default {
             attract: {
               enable: false, // 原子之间吸引
               rotateX: 600, // 原子之间吸引X水平距离
-              rotateY: 600 // 原子之间吸引Y水平距离
-            }
-          }
+              rotateY: 600, // 原子之间吸引Y水平距离
+            },
+          },
         },
         interactivity: {
           detect_on: "canvas", // 原子之间互动检测 "canvas", "window"
           events: {
             onhover: {
               enable: true, // 悬停
-              mode: "bubble" // 悬停模式      "grab"抓取临近的,"bubble"泡沫球效果,"repulse"击退效果,["grab", "bubble"]
+              mode: "bubble", // 悬停模式      "grab"抓取临近的,"bubble"泡沫球效果,"repulse"击退效果,["grab", "bubble"]
             },
             onclick: {
               enable: false, // 点击效果
-              mode: "repulse" // 点击效果模式   "push" ,"remove" ,"bubble" ,"repulse" ,["push", "repulse"]
+              mode: "repulse", // 点击效果模式   "push" ,"remove" ,"bubble" ,"repulse" ,["push", "repulse"]
             },
-            resize: true // 互动事件调整
+            resize: true, // 互动事件调整
           },
           modes: {
             grab: {
               distance: 100, // 原子互动抓取距离
               line_linked: {
-                opacity: 0.8 // 原子互动抓取距离连线不透明度
-              }
+                opacity: 0.8, // 原子互动抓取距离连线不透明度
+              },
             },
             bubble: {
               distance: 250, // 原子抓取泡沫效果之间的距离
               size: 4, // 原子抓取泡沫效果之间的大小
               duration: 2, // 原子抓取泡沫效果之间的持续事件
               opacity: 1, // 原子抓取泡沫效果透明度
-              speed: 1
+              speed: 1,
             },
             repulse: {
               distance: 400, // 击退效果距离
-              duration: 0.4 // 击退效果持续事件
+              duration: 0.4, // 击退效果持续事件
             },
             push: {
-              particles_nb: 2 // 粒子推出的数量
+              particles_nb: 2, // 粒子推出的数量
             },
             remove: {
-              particles_nb: 2
-            }
-          }
+              particles_nb: 2,
+            },
+          },
         },
-        retina_detect: true
+        retina_detect: true,
       },
       starList: [
         { x: 610, y: 570 },
@@ -275,7 +381,7 @@ export default {
         { x: 310, y: 440 },
         { x: 420, y: 510 },
         { x: 780, y: 500 },
-        { x: 680, y: 640 }
+        { x: 680, y: 640 },
       ],
       bottomList: [],
       iconList: [
@@ -288,8 +394,8 @@ export default {
         "icon-fuwuqi",
         "icon-yunjiankong",
         "icon-jiankong",
-        "icon-jiankong3"
-      ]
+        "icon-jiankong3",
+      ],
     };
   },
   methods: {
@@ -304,7 +410,7 @@ export default {
       this.isLoading = true;
       let res = await dishPage({
         page: 1,
-        pageSize: 10
+        pageSize: 10,
       });
       if (res.code === 1) {
         this.$nextTick(() => {
@@ -323,10 +429,28 @@ export default {
         });
         this.isLoading = false;
       }
-    }
+    },
+    showSlides() {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("dot");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) {
+        slideIndex = 1;
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+      setTimeout(showSlides, 2000); // 切换时间
+    },
   },
   components: {
-    Card
+    Card,
   },
   mounted() {
     //  for (var i = 0; i < 100; i++) {
@@ -341,12 +465,13 @@ export default {
     window.particlesJS("particlesId", this.particleJson);
     // this.dishPageList();
     location.reload();
+    showSlides();
   },
   beforeRouteEnter(to, from, next) {
-    next(vm => {
+    next((vm) => {
       vm.dishPageList();
     });
-  }
+  },
 };
 </script>
 
@@ -534,6 +659,7 @@ canvas
   .bg-wrapper
     width: 100%
     height: 100%
+    overflow: hidden;
     background-image: url('~@/assets/images/home-example/bg.min.png')
     -webkit-background-size: cover
     background-size: cover
@@ -682,8 +808,88 @@ canvas
   flex-direction column;
   justify-content center;
   align-items left;
-  color:#5eacf5; 
-  font-size:14px; 
+  color:#5eacf5;
+  font-size:14px;
   line-height:30px;
+}
+</style>
+
+<style lang="css">
+ul {
+  list-style: none;
+}
+
+#slideshow {
+  width: 100vw;
+  height: 30vh;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+}
+
+#imglist li {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  /* 全部图片设为透明 */
+  opacity: 0;
+  transition: opacity 3.5s;
+}
+
+#imglist > li img {
+  height: 1000px;
+}
+
+#dotlist {
+  position: absolute;
+  bottom: 30px;
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+#dotlist > li {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgb(206, 16, 16);
+  /* 全部小圆点设为半透明 */
+  opacity: 0.3;
+  cursor: pointer;
+  user-select: none;
+}
+/* 具有appear类的元素设为 不透明 即显示 */
+
+#imglist > li.appear,
+#dotlist > li.appear {
+  opacity: 1;
+}
+/* 左右轮播按钮 */
+
+#pre,
+#next {
+  position: absolute;
+  font-size: 100px;
+  color: rgba(0, 0, 0, 0.3);
+  top: 50%;
+  transform: translate(0, -50%);
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+}
+
+#pre {
+  left: 20px;
+}
+
+#next {
+  right: 20px;
+}
+
+#pre:hover,
+#next:hover {
+  color: rgba(255, 255, 255, 0.3);
 }
 </style>
