@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import BinUI from 'bin-ui'
 
 const Home = () => import('../pages/data/home/Home')
+const Home3 = () => import('../pages/data/home/Home3')
 // const Home2 = () => import('../pages/data/home/Home2')
 // const Overview2 = () => import('../pages/data/overview/Overview2')
 const Overview = () => import('../pages/data/overview/Overview')
@@ -23,10 +24,10 @@ const router = new VueRouter({
       path: '/home',
       component: Home
     },
-    // {
-    //   path: '/home2',
-    //   component: Home2
-    // },
+    {
+      path: '/home3',
+      component: Home3
+    },
     {
       path: '/overview',
       component: Overview
@@ -53,7 +54,7 @@ const router = new VueRouter({
     },
     {
       path: '/',
-      redirect: '/home'
+      redirect: '/home3'
     },
     {
       path: '/login',

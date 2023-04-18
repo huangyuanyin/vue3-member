@@ -1,10 +1,9 @@
 <template>
-  <div id="app" v-cloak>
+  <div id="app" v-cloak :class="[this.$route.path === '/home3' ? 'appBack' : '']">
     <!-- <div
-      v-if="this.$route.path !== '/home2' && this.$route.path !== '/login'"
-      class="page-title-wrapper"
-    > -->
-    <div v-if="this.$route.path !== '/home2'" class="page-title-wrapper">
+      v-if=" this.$route.path !=='/home2' && this.$route.path !=='/login'"
+      class=" page-title-wrapper"> -->
+    <div v-if="this.$route.path !== '/home3'" class="page-title-wrapper">
       <span class="page-title">
         {{ returnRouteName() }}
       </span>
@@ -50,6 +49,7 @@ export default {
 .to-home {
   z-index: 99999999;
 }
+
 .router-link-exact-active {
   font-weight: 700;
   color: #fff;
@@ -80,6 +80,8 @@ $bgc = #050819
   background-color: $bgc
   overflow-x auto
   overflow-y auto
+.appBack
+  background-color: #fff !important
 i
   font-style normal
 
