@@ -38,8 +38,12 @@
           margin-top: 3%;
         "
       >
-        <!-- <img style="width:700px; height: 76px" src="@/assets/images/QQ.png" alt="" /> -->
-        中航天智慧工地综合服务平台
+        <img
+          style="width: 700px; height: 76px"
+          src="@/assets/images/wx.svg"
+          alt=""
+        />
+        <!-- 中航天智慧工地综合服务平台 -->
       </div>
       <div class="s-wrap">
         <el-tabs v-model="activeName" @tab-click="handleClick">
