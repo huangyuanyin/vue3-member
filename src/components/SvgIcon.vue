@@ -5,22 +5,22 @@
   </svg>
 </template>
 <script>
-import { computed } from "vue";
+import { computed } from 'vue';
 
 export default {
   props: {
     iconName: {
       type: String,
-      required: true
+      required: true,
     },
     className: {
       type: String,
-      default: ""
+      default: '',
     },
     color: {
       type: String,
-      default: "#409eff"
-    }
+      default: '',
+    },
   },
   computed: {
     iconClassName() {
@@ -30,9 +30,9 @@ export default {
       if (this.className) {
         return `svg-icon ${this.className}`;
       }
-      return "svg-icon";
-    }
-  }
+      return 'svg-icon';
+    },
+  },
 };
 </script>
 <style scoped>

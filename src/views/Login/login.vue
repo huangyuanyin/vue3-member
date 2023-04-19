@@ -260,7 +260,7 @@ export default {
           if (res.code === 1) {
             localStorage.setItem("token", res.data);
             localStorage.setItem("userInfo", JSON.stringify(jwt_decode(res.data)));
-            this.$router.push("/home");
+            this.$router.push("/home3");
           } else {
             this.$message.error(res.msg);
           }

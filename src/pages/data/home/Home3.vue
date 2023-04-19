@@ -2,49 +2,58 @@
   <div class="Home3-wrap">
     <div class="top_wrap">
       <div class="top-left">
-        <span>新闻</span>
-        <span>简介</span>
-        <span>贴吧</span>
-        <span>视频</span>
+        <span>公司</span>
+        <span>产品</span>
+        <span>公告</span>
+        <span>解决方案</span>
         <span>更多</span>
       </div>
       <div class="top-right">
         <span>北京</span>
         <span>设置</span>
-        <el-dropdown>
+        <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
-            <span class="header" style="margin-right: 3px;">
+            <span class="header" style="margin-right: 3px">
               <img src="https://himg.bdimg.com/sys/portraitn/item/public.1.9ae28e6b.lpgg-M-jsxZYTwX1Gz7Z-A" alt=""
-                srcset="">
+                srcset="" />
             </span>
             <span>登录名</span>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>退出登录</el-dropdown-item>
+            <el-dropdown-item command="a">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
     </div>
     <div class="content-wrap">
-      <div style="margin: 40px 35%;font-size: 40px;font-weight: 600;color: #e10602;">
+      <div style="
+                    text-align: center;
+                    font-size: 40px;
+                    font-weight: 600;
+                    color: #004098;
+                    margin-top: 3%;
+                  ">
         <!-- <img style="width:700px; height: 76px" src="@/assets/images/QQ.png" alt="" /> -->
         中航天智慧工地综合服务平台
       </div>
       <div class="s-wrap">
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="我的关注" name="first">
+          <el-tab-pane label="我的导航" name="first">
             <el-card class="box-card" shadow="always">
-              <div class="box-header">我的导航
-                <el-button type="text" icon="el-icon-edit" disabled>编辑</el-button>
+              <div class="box-header">
+                我的导航
+                <el-button type="text" icon="el-icon-edit" disabled>
+                  编辑
+                </el-button>
               </div>
               <div class="icon_list">
                 <div class="icon-item" v-for="(item, index) in bottomList" :key="'bottomList' + index"
                   @click="toLink(item.url)">
-                  <svg-icon :iconName="item.icon" size="80" className="aaa" style="margin-bottom: 20px;"></svg-icon>
+                  <svg-icon :iconName="item.icon" size="80" className="aaa" style="margin-bottom: 20px"></svg-icon>
                   <span>{{ item.name }}</span>
                 </div>
                 <div class="icon-item-add" @click="tip">
-                  <i class="el-icon-plus"></i>
+                  <i class="el-icon-plus" style="padding: 8px"></i>
                 </div>
               </div>
             </el-card>
@@ -55,13 +64,15 @@
     </div>
     <div class="bottom_wrap">
       <div style="margin-right: 20px">
-        <img style="width: 110px; height: 76px" src="@/assets/images/2323.gif" alt="" />
+        <img style="width: 110px; height: 76px" src="@/assets/images/QQ.jpg" alt="" />
       </div>
       <div class="backwrap">
         <span>Copyright©中国航天科工集团公司 中航天智慧工地综合服务平台</span>
-        <span>制作单位：中航天建设工程集团有限公司
+        <span>
+          制作单位：中航天建设工程集团有限公司
           地址：北市市丰台区看丹路4号院甲6号 邮编：100070
-          联系电话：(010)83680501</span>
+          联系电话：(010)83680501
+        </span>
         <span>欢迎关注官方微信公众号：casic-ZHT</span>
       </div>
     </div>
@@ -69,7 +80,7 @@
 </template>
 
 <script>
-import { dishPage } from "@/api/user";
+import { dishPage } from '@/api/user';
 export default {
   name: 'demo',
   components: {},
@@ -79,18 +90,14 @@ export default {
       isLoading: false,
       bottomList: [],
       iconList: [
-        "icon-jiankong3-copy",
-        "icon-jishufuwu-copy",
-        "icon-fuwudiqiu-copy",
-        "icon-fuwuliu-copy",
-        "icon-fuwu_o-copy",
-        "icon-fuwu1-copy",
-        "icon-fuwuqi-copy",
-        "icon-yunjiankong-copy",
-        "icon-jiankong-copy",
-        "icon-jiankong3-copy",
+        'icon-maozi',
+        'icon-zhihuigongdi',
+        'icon-shuibiao',
+        'icon-zhihuigongdi1',
+        'icon-jikeng',
+        'icon-yanganqi',
       ],
-    }
+    };
   },
   methods: {
     handleClick(tab, event) {
@@ -106,10 +113,10 @@ export default {
         this.$nextTick(() => {
           this.bottomList = res.data.records || [];
           // 循环bottomList和iconList，给每个bottomList添加icon
-          for (var i = 0; i < this.bottomList.length; i++) {
-            this.bottomList[i].icon = this.iconList[i];
-          }
-          console.log(`output->`, this.bottomList)
+          // for (var i = 0; i < this.bottomList.length; i++) {
+          //   this.bottomList[i].icon = this.iconList[i];
+          // }
+          console.log(`output->`, this.bottomList);
         });
         this.isLoading = false;
       }
@@ -117,21 +124,27 @@ export default {
     tip() {
       this.$message({
         message: '请通过后台管理系统配置导航！',
-        type: 'warning'
+        type: 'warning',
       });
     },
     toLink(it) {
       // 如果it是http开头的，就直接打开，否则就加上http://
-      if (it.indexOf("http") == -1) {
-        it = "http://" + it;
+      if (it.indexOf('http') == -1) {
+        it = 'http://' + it;
       }
-      window.open(it, "_blank");
-    }
+      window.open(it, '_blank');
+    },
+    handleCommand(command) {
+      if (command === 'a') {
+        localStorage.clear();
+        this.$router.push('/login');
+      }
+    },
   },
   created() {
     this.dishPageList();
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
@@ -290,11 +303,11 @@ export default {
 }
 
 .icon-item-add {
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
   text-align: center;
-  border: 1px dashed #D7D9E0;
+  border: 1px dashed #d7d9e0;
   border-radius: 8px;
   cursor: pointer;
 }
@@ -305,6 +318,10 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 8px;
   padding: 8px;
+}
+
+.Home3-wrap {
+  font-family: "汉仪大黑简体", sans-serif;
 }
 </style>
 

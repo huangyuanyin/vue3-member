@@ -60,7 +60,7 @@
               v-waves
               :loading="loginLoading"
             >
-              {{ loginLoading ? "登录中..." : "登 录" }}
+              {{ loginLoading ? '登录中...' : '登 录' }}
             </b-button>
           </b-form>
         </div>
@@ -78,39 +78,39 @@
 </template>
 
 <script>
-import { loginApi } from "@/api/user.js";
+import { loginApi } from '@/api/user.js';
 
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     return {
-      verifyCodeUrl: "",
+      verifyCodeUrl: '',
       timeInterval: null,
       // 表单
       formLogin: {
-        username: "admin",
-        password: "123456"
+        username: 'admin',
+        password: '123456',
         // captcha: ""
       },
       // 校验
       rules: {
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" }
+          { required: true, message: '请输入用户名', trigger: 'blur' },
         ],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }]
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
         // captcha: [{ required: true, message: "请输入验证码", trigger: "blur" }]
       },
-      loginLoading: false
+      loginLoading: false,
     };
   },
   created() {
     // this.refreshCode();
-    document.addEventListener("keyup", this.enter);
+    document.addEventListener('keyup', this.enter);
   },
   methods: {
     // enter键盘事件
     enter(e) {
-      if (e.code === "Enter") {
+      if (e.code === 'Enter') {
         this.submit();
       }
     },
@@ -118,7 +118,7 @@ export default {
     refreshCode() {},
     // 提交登录信息
     submit() {
-      this.$refs.loginForm.validate(async valid => {
+      this.$refs.loginForm.validate(async (valid) => {
         // valid = true;
         if (valid) {
           this.loginLoading = true;
@@ -126,9 +126,9 @@ export default {
           this.loginLoading = false;
           // 登录
           if (res.code === 1) {
-            this.$router.push("/home");
-            localStorage.setItem("token", JSON.stringify(res.data));
-            localStorage.setItem("userInfo", JSON.stringify(res.data));
+            this.$router.push('/home3');
+            localStorage.setItem('token', JSON.stringify(res.data));
+            localStorage.setItem('userInfo', JSON.stringify(res.data));
           } else {
             this.$message.error(res.msg);
           }
@@ -139,14 +139,14 @@ export default {
       });
     },
     loginSuccess(res) {
-      if (res.data.code === "0") {
+      if (res.data.code === '0') {
         const token = res.data.data;
-        this.$store.dispatch("setToken", token).then(() => {
+        this.$store.dispatch('setToken', token).then(() => {
           // 重定向对象不存在则返回顶层路径
-          this.$router.push("/");
+          this.$router.push('/');
         });
       } else {
-        this.$message({ content: res.data.message, type: "danger" });
+        this.$message({ content: res.data.message, type: 'danger' });
         this.refreshCode();
       }
       this.loginLoading = false;
@@ -156,16 +156,16 @@ export default {
       this.loginLoading = false;
       this.refreshCode();
       this.$message({
-        type: "danger",
+        type: 'danger',
         content:
           ((err.response || {}).data || {}).message ||
-          "请求出现错误，请稍后再试"
+          '请求出现错误，请稍后再试',
       });
-    }
+    },
   },
   beforeDestroy() {
-    document.removeEventListener("keyup", this.enter);
-  }
+    document.removeEventListener('keyup', this.enter);
+  },
 };
 </script>
 
@@ -182,11 +182,11 @@ export default {
 <style lang="stylus" scoped>
 .page-login {
   user-select: none;
-  background: url("../../assets/images/login-bg.jpg") no-repeat center center;
+  background: url('../../assets/images/login-bg.jpg') no-repeat center center;
   height: 100%;
   position: relative;
-  // 层
 
+  // 层
   .layer {
     position: absolute;
     left: 0;
@@ -207,12 +207,11 @@ export default {
   }
 
   // 登陆页面控件的容器
-
   .content {
     height: 100%;
     min-height: 500px;
-    // 登录表单
 
+    // 登录表单
     .form {
       position: relative;
       width: 400px;
@@ -226,11 +225,11 @@ export default {
         top: 0;
         left: 60px;
         margin-top: -24px;
-        background: url("../../assets/images/title-bg.png") no-repeat 0 0;
-        width 280px;
+        background: url('../../assets/images/title-bg.png') no-repeat 0 0;
+        width: 280px;
         height: 48px;
         line-height: 48px;
-        background-size: 100% 100%
+        background-size: 100% 100%;
         text-align: center;
         color: #fff;
         font-size: 20px;
@@ -238,7 +237,6 @@ export default {
       }
 
       // 登录按钮
-
       .button-login {
         width: 100%;
       }
@@ -262,7 +260,6 @@ export default {
     }
 
     // footer
-
     .footer {
       padding: 2em 0 0;
 
@@ -278,7 +275,6 @@ export default {
   }
 
   // 背景
-
   .circles {
     position: absolute;
     top: 0;
@@ -296,12 +292,14 @@ export default {
       background: #FFF;
       animation: animate 25s linear infinite;
       bottom: -200px;
+
       @keyframes animate {
         0% {
           transform: translateY(0) rotate(0deg);
-          opacity: .3;
+          opacity: 0.3;
           border-radius: 0;
         }
+
         100% {
           transform: translateY(-1000px) rotate(720deg);
           opacity: 0;

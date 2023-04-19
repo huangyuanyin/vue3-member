@@ -1,48 +1,58 @@
 <script>
-import { loginApi } from '@/api/user.js'
+import { loginApi } from '@/api/user.js';
 export default {
   data() {
     return {
       loading: false,
       loginForm: {
         username: '',
-        password: ''
+        password: '',
       },
       rules: {
         username: [
           { required: true, message: '请输入账号', trigger: 'blur' },
-          { min: 4, max: 20, message: '长度在 4 到 20 个字符', trigger: 'blur' }
+          {
+            min: 4,
+            max: 20,
+            message: '长度在 4 到 20 个字符',
+            trigger: 'blur',
+          },
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 4, max: 20, message: '长度在 4 到 20 个字符', trigger: 'blur' }
-        ]
-      }
-    }
+          {
+            min: 4,
+            max: 20,
+            message: '长度在 4 到 20 个字符',
+            trigger: 'blur',
+          },
+        ],
+      },
+    };
   },
   methods: {
     handleLogin(formName) {
-      this.$refs[formName].validate(async valid => {
+      this.$refs[formName].validate(async (valid) => {
         if (valid) {
-          let res = await loginApi(this.loginForm)
+          let res = await loginApi(this.loginForm);
           if (res.code === 1) {
-            this.$router.push('/home')
-            localStorage.setItem('token', JSON.stringify(res.data))
-            localStorage.setItem('userInfo', JSON.stringify(res.data))
+            this.$router.push('/home3');
+            localStorage.setItem('token', JSON.stringify(res.data));
+            localStorage.setItem('userInfo', JSON.stringify(res.data));
           } else {
-            this.$message.error(res.msg)
+            this.$message.error(res.msg);
           }
         } else {
-          console.log('error submit!!')
-          return false
+          console.log('error submit!!');
+          return false;
         }
-      })
+      });
     },
     resetForm(formName) {
-      this.$refs[formName].resetFields()
-    }
-  }
-}
+      this.$refs[formName].resetFields();
+    },
+  },
+};
 </script>
 <!-- <script>
 import { ref, reactive } from "vue";

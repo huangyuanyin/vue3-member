@@ -18,6 +18,7 @@ import "../permission";
 
 import SvgIcon from "./components/SvgIcon.vue";
 import "./assets/iconfont/iconfont.js";
+import "./assets/iconfont/iconfont-2.js"
 
 import "element-ui/lib/theme-chalk/index.css";
 
