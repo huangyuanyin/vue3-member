@@ -14,8 +14,11 @@
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
             <span class="header" style="margin-right: 3px">
-              <img src="https://himg.bdimg.com/sys/portraitn/item/public.1.9ae28e6b.lpgg-M-jsxZYTwX1Gz7Z-A" alt=""
-                srcset="" />
+              <img
+                src="https://himg.bdimg.com/sys/portraitn/item/public.1.9ae28e6b.lpgg-M-jsxZYTwX1Gz7Z-A"
+                alt=""
+                srcset=""
+              />
             </span>
             <span>登录名</span>
           </span>
@@ -26,13 +29,15 @@
       </div>
     </div>
     <div class="content-wrap">
-      <div style="
-                    text-align: center;
-                    font-size: 40px;
-                    font-weight: 600;
-                    color: #004098;
-                    margin-top: 3%;
-                  ">
+      <div
+        style="
+          text-align: center;
+          font-size: 40px;
+          font-weight: 600;
+          color: #004098;
+          margin-top: 3%;
+        "
+      >
         <!-- <img style="width:700px; height: 76px" src="@/assets/images/QQ.png" alt="" /> -->
         中航天智慧工地综合服务平台
       </div>
@@ -47,9 +52,18 @@
                 </el-button>
               </div>
               <div class="icon_list">
-                <div class="icon-item" v-for="(item, index) in bottomList" :key="'bottomList' + index"
-                  @click="toLink(item.url)">
-                  <svg-icon :iconName="item.icon" size="80" className="aaa" style="margin-bottom: 20px"></svg-icon>
+                <div
+                  class="icon-item"
+                  v-for="(item, index) in bottomList"
+                  :key="'bottomList' + index"
+                  @click="toLink(item.url)"
+                >
+                  <svg-icon
+                    :iconName="item.icon"
+                    size="80"
+                    className="aaa"
+                    style="margin-bottom: 20px"
+                  ></svg-icon>
                   <span>{{ item.name }}</span>
                 </div>
                 <div class="icon-item-add" @click="tip">
@@ -64,7 +78,11 @@
     </div>
     <div class="bottom_wrap">
       <div style="margin-right: 20px">
-        <img style="width: 110px; height: 76px" src="@/assets/images/QQ.jpg" alt="" />
+        <img
+          style="width: 110px; height: 76px"
+          src="@/assets/images/QQ.jpg"
+          alt=""
+        />
       </div>
       <div class="backwrap">
         <span>Copyright©中国航天科工集团公司 中航天智慧工地综合服务平台</span>
@@ -107,7 +125,7 @@ export default {
       this.isLoading = true;
       let res = await dishPage({
         page: 1,
-        pageSize: 10,
+        pageSize: 100,
       });
       if (res.code === 1) {
         this.$nextTick(() => {
@@ -233,10 +251,10 @@ export default {
   box-sizing: content-box;
   background: #fff;
   padding: 14px 32px 0;
-  width: 50%;
+  width: 60%;
   position: fixed;
   top: 30%;
-  left: 25%;
+  left: 20%;
 }
 
 .box-card {
@@ -247,7 +265,7 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 12px;
   font-family: Arial, sans-serif;
-  height: 300px;
+  max-height: 400px;
   display: flex;
   flex-direction: column;
 }
@@ -284,6 +302,8 @@ export default {
   padding: 16px 30px;
   display: flex;
   flex-wrap: wrap;
+  max-height: 350px;
+  overflow-y: auto;
   /* justify-content: flex-; */
 }
 
@@ -292,9 +312,9 @@ export default {
   flex-direction: column;
   justify-content: center;
   margin-right: 50px;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
   align-items: center;
-  min-width: 80px;
+  /* min-width: 80px; */
   cursor: pointer;
 }
 
@@ -321,8 +341,6 @@ export default {
 }
 
 .Home3-wrap {
-  font-family: "汉仪大黑简体", sans-serif;
+  font-family: '汉仪大黑简体', sans-serif;
 }
 </style>
-
-
