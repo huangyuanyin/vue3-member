@@ -14,13 +14,9 @@
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
             <span class="header" style="margin-right: 3px">
-              <img
-                src="https://himg.bdimg.com/sys/portraitn/item/public.1.9ae28e6b.lpgg-M-jsxZYTwX1Gz7Z-A"
-                alt=""
-                srcset=""
-              />
+              <img src="@/assets/images/QQ.jpg" alt="" srcset="" />
             </span>
-            <span>登录名</span>
+            <span>{{ userName }}</span>
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="a">退出登录</el-dropdown-item>
@@ -35,11 +31,11 @@
           font-size: 40px;
           font-weight: 600;
           color: #004098;
-          margin-top: 3%;
+          margin-top: 2.5%;
         "
       >
         <img
-          style="width: 700px; height: 76px"
+          style="width: 800px; height: 86px"
           src="@/assets/images/wx.svg"
           alt=""
         />
@@ -57,17 +53,32 @@
               </div>
               <div class="icon_list">
                 <div
+                  @contextmenu.prevent.capture
                   class="icon-item"
                   v-for="(item, index) in bottomList"
                   :key="'bottomList' + index"
                   @click="toLink(item.url)"
                 >
-                  <svg-icon
-                    :iconName="item.icon"
-                    size="80"
-                    className="aaa"
-                    style="margin-bottom: 20px"
-                  ></svg-icon>
+                  <el-dropdown
+                    ref="Contextmenu"
+                    :hide-on-click="true"
+                    placement="top-end"
+                    @command="
+                      (command) => {
+                        command2(command, item);
+                      }
+                    "
+                  >
+                    <svg-icon
+                      @contextmenu.stop="handContextmenu"
+                      :iconName="item.icon"
+                      className="aaa"
+                      style="margin-bottom: 20px"
+                    ></svg-icon>
+                    <el-dropdown-menu slot="dropdown">
+                      <el-dropdown-item>密码本</el-dropdown-item>
+                    </el-dropdown-menu>
+                  </el-dropdown>
                   <span>{{ item.name }}</span>
                 </div>
                 <div class="icon-item-add" @click="tip">
@@ -98,16 +109,70 @@
         <span>欢迎关注官方微信公众号：casic-ZHT</span>
       </div>
     </div>
+    <el-dialog
+      title="密码本"
+      :visible.sync="dialogVisible"
+      width="50%"
+      :before-close="handleClose"
+    >
+      <div class="" v-for="(item, index) in countsList">
+        <el-form ref="formRef" :model="item" :rules="rules" label-width="80px">
+          <div style="display: flex; margin-bottom: 20px">
+            <el-form-item
+              :key="index"
+              :label="'账号' + (index + 1)"
+              prop="userName"
+            >
+              <el-input
+                v-model="item.userName"
+                placeholder="请输入账号"
+              ></el-input>
+            </el-form-item>
+            <el-form-item
+              :key="'password' + index"
+              :label="'密码' + (index + 1)"
+              prop="password"
+            >
+              <el-input
+                v-model="item.password"
+                placeholder="请输入密码"
+              ></el-input>
+            </el-form-item>
+            <el-button
+              type="primary"
+              @click="addRow(index)"
+              style="margin: 0 20px 0 30px"
+            >
+              新增
+            </el-button>
+            <el-button type="danger" @click="removeRow(index)">删除</el-button>
+          </div>
+        </el-form>
+      </div>
+
+      <span slot="footer" class="dialog-footer">
+        <!-- <el-button @click="dialogVisible = false">取 消</el-button> -->
+        <el-button type="primary" @click="submitForm">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
-
 <script>
-import { dishPage } from '@/api/user';
+import { dishPage, addDishCount } from '@/api/user';
 export default {
   name: 'demo',
   components: {},
   data() {
     return {
+      countsList: [{ userName: '', password: '' }],
+      rules: {
+        userName: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+      },
+      // 获取localStorage中的用户信息
+      userName: JSON.parse(localStorage.getItem('userInfo')).sub,
+      employeeId: '', // 网站id
+      dialogVisible: false,
       activeName: 'first',
       isLoading: false,
       bottomList: [],
@@ -156,10 +221,65 @@ export default {
       }
       window.open(it, '_blank');
     },
+    command2(item, index) {
+      console.log(`output->index`, index);
+      this.employeeId = index.id;
+      this.countsList = index.count;
+      this.dialogVisible = true;
+    },
+    handleClose(done) {
+      this.dialogVisible = false;
+      this.countsList = [{ userName: '', password: '' }];
+    },
     handleCommand(command) {
       if (command === 'a') {
         localStorage.clear();
         this.$router.push('/login');
+      }
+    },
+    addRow(index) {
+      this.countsList.splice(index + 1, 0, { userName: '', password: '' });
+    },
+    removeRow(index) {
+      if (this.countsList.length <= 1) {
+        this.$message({
+          message: '至少保留一个账号密码',
+          type: 'warning',
+        });
+        return;
+      }
+      this.countsList.splice(index, 1);
+    },
+    async submitForm() {
+      const forms = this.$refs.formRef;
+      if (forms) {
+        for (const item of forms) {
+          try {
+            const result = await item.validate();
+            if (!result) {
+              return;
+            }
+          } catch (error) {
+            this.$message({
+              message: '请完善账号密码',
+              type: 'warning',
+            });
+            return;
+          }
+        }
+      }
+      let res = await addDishCount({
+        userID: JSON.parse(localStorage.getItem('userInfo')).jti,
+        employeeId: this.employeeId,
+        count: this.countsList,
+      });
+      if (res.code === 1) {
+        this.$message({
+          message: '修改成功',
+          type: 'success',
+        });
+        this.dialogVisible = false;
+        this.countsList = [{ userName: '', password: '' }];
       }
     },
   },
@@ -257,7 +377,7 @@ export default {
   padding: 14px 32px 0;
   width: 60%;
   position: fixed;
-  top: 30%;
+  top: 26%;
   left: 20%;
 }
 
@@ -306,7 +426,7 @@ export default {
   padding: 16px 30px;
   display: flex;
   flex-wrap: wrap;
-  max-height: 350px;
+  max-height: 35vh;
   overflow-y: auto;
   /* justify-content: flex-; */
 }
@@ -317,9 +437,9 @@ export default {
   justify-content: center;
   margin-right: 50px;
   margin-bottom: 60px;
-  align-items: center;
-  /* min-width: 80px; */
+  min-width: 80px;
   cursor: pointer;
+  align-items: flex-start;
 }
 
 .icon-item span:hover {
@@ -327,9 +447,9 @@ export default {
 }
 
 .icon-item-add {
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
+  width: 65px;
+  height: 65px;
+  line-height: 65px;
   text-align: center;
   border: 1px dashed #d7d9e0;
   border-radius: 8px;
@@ -337,7 +457,7 @@ export default {
 }
 
 .aaa {
-  font-size: 50px;
+  font-size: 65px;
   margin-bottom: 20px;
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 8px;
@@ -346,5 +466,12 @@ export default {
 
 .Home3-wrap {
   font-family: '汉仪大黑简体', sans-serif;
+}
+.el-form {
+  display: flex;
+  flex-direction: column;
+}
+.el-form .el-form-item {
+  margin-bottom: 0px;
 }
 </style>
