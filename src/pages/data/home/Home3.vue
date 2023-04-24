@@ -394,6 +394,10 @@ export default {
   flex-direction: column;
 }
 
+.box-card ::-webkit-scrollbar {
+  display: none;
+}
+
 .box-card /deep/.el-card__body {
   padding: 0 !important;
   height: 100%;
@@ -429,6 +433,9 @@ export default {
   max-height: 35vh;
   overflow-y: auto;
   /* justify-content: flex-; */
+}
+.icon_list ::-webkit-scrollbar {
+  display: none;
 }
 
 .icon-item {
@@ -466,6 +473,10 @@ export default {
 
 .Home3-wrap {
   font-family: '汉仪大黑简体', sans-serif;
+  background-image: url('~@/assets/images/bg.05922c9.png');
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  height: 100vh;
 }
 .el-form {
   display: flex;
