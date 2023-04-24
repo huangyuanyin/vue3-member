@@ -88,13 +88,23 @@
                     </el-dropdown-menu>
                   </el-dropdown>
                 </div>
-                <div class="icon-item-add" @click="tip">
-                  <i class="el-icon-plus" style="padding: 8px"></i>
+                <div
+                  style="
+                    width: 120px;
+                    height: 100px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                  <div class="icon-item-add" @click="tip">
+                    <i class="el-icon-plus" style="padding: 8px"></i>
+                  </div>
                 </div>
               </div>
             </el-card>
           </el-tab-pane>
-          <el-tab-pane label="推荐" name="second" disabled></el-tab-pane>
+          <el-tab-pane label="公告" name="second" disabled></el-tab-pane>
         </el-tabs>
       </div>
     </div>
@@ -485,6 +495,9 @@ export default {
   border: 1px dashed #d7d9e0;
   border-radius: 8px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .aaa {
