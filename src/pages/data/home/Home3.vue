@@ -69,17 +69,24 @@
                       }
                     "
                   >
-                    <svg-icon
-                      @contextmenu.stop="handContextmenu"
-                      :iconName="item.icon"
-                      className="aaa"
-                      style="margin-bottom: 20px"
-                    ></svg-icon>
+                    <div>
+                      <svg-icon
+                        @contextmenu.stop="handContextmenu"
+                        :iconName="item.icon"
+                        className="aaa"
+                        style="margin-bottom: 20px"
+                      ></svg-icon>
+                      <span
+                        class="bbb"
+                        style="display: inline-block; text-align: center"
+                      >
+                        {{ item.name }}
+                      </span>
+                    </div>
                     <el-dropdown-menu slot="dropdown">
                       <el-dropdown-item>密码本</el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
-                  <span>{{ item.name }}</span>
                 </div>
                 <div class="icon-item-add" @click="tip">
                   <i class="el-icon-plus" style="padding: 8px"></i>
@@ -103,7 +110,7 @@
         <span>Copyright©中国航天科工集团公司 中航天智慧工地综合服务平台</span>
         <span>
           制作单位：中航天建设工程集团有限公司
-          地址：北市市丰台区看丹路4号院甲6号 邮编：100070
+          地址：北京市丰台区看丹路4号院甲6号 邮编：100070
           联系电话：(010)83680501
         </span>
         <span>欢迎关注官方微信公众号：casic-ZHT</span>
@@ -331,6 +338,9 @@ export default {
   color: #416bfb;
 }
 
+.bbb :hover {
+}
+
 .top-right span {
   margin-right: 24px;
   /* margin-top: 19px; */
@@ -443,14 +453,28 @@ export default {
   flex-direction: column;
   justify-content: center;
   margin-right: 50px;
-  margin-bottom: 60px;
-  min-width: 80px;
+  margin-bottom: 35px;
+  width: 120px;
+  height: 120px;
   cursor: pointer;
-  align-items: flex-start;
+  align-items: center;
+}
+
+.icon-item:hover {
+  transition: all 0.5s;
+  background: #fff;
+  box-shadow: 0 3px 20px 1px rgba(0, 0, 0, 0.16);
+  border-radius: 6px 6px 6px 6px;
+}
+
+/deep/.el-dropdown-selfdefine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .icon-item span:hover {
-  color: #416bfb;
+  /* color: #416bfb; */
 }
 
 .icon-item-add {
