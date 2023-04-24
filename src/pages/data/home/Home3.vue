@@ -386,7 +386,7 @@ export default {
   position: relative;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  /* border: 1px solid rgba(0, 0, 0, 0.05); */
   border-radius: 12px;
   font-family: Arial, sans-serif;
   max-height: 400px;
@@ -466,7 +466,7 @@ export default {
 .aaa {
   font-size: 65px;
   margin-bottom: 20px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  /* border: 1px solid rgba(0, 0, 0, 0.05); */
   border-radius: 8px;
   padding: 8px;
 }
@@ -476,6 +476,7 @@ export default {
   background-image: url('~@/assets/images/bg.05922c9.png');
   background-repeat: no-repeat;
   background-position: 0 100%;
+  background-size: 100% auto;
   height: 100vh;
 }
 .el-form {
