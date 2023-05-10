@@ -38,3 +38,17 @@ export function addDishCount(params) {
     data: params,
   });
 }
+
+export const getNoticeListApi = (params) => {
+  return request({
+    url: '/notice/page',
+    method: 'get',
+    params,
+  });
+};
+export const getNoticeDetailApi = (params) => {
+  return request({
+    url: `/notice/${params}`,
+    method: 'get',
+  });
+};

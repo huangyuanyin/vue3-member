@@ -1,9 +1,20 @@
 <template>
-  <div id="app" v-cloak :class="[this.$route.path === '/home3' ? 'appBack' : '']">
+  <div
+    id="app"
+    v-cloak
+    :class="[
+      this.$route.path === '/home3' || this.$route.path === '/home4'
+        ? 'appBack'
+        : '',
+    ]"
+  >
     <!-- <div
       v-if=" this.$route.path !=='/home2' && this.$route.path !=='/login'"
       class=" page-title-wrapper"> -->
-    <div v-if="this.$route.path !== '/home3'" class="page-title-wrapper">
+    <div
+      v-if="this.$route.path !== '/home3' && this.$route.path !== '/home4'"
+      class="page-title-wrapper"
+    >
       <span class="page-title">
         {{ returnRouteName() }}
       </span>
@@ -19,30 +30,30 @@ export default {
   name: 'app',
   methods: {
     returnRouteName() {
-      let route = this.$route.path
+      let route = this.$route.path;
       switch (route) {
         case '/overview':
-          return '系统概况专题111'
+          return '系统概况专题111';
         case '/summary':
-          return '数据归集专题'
+          return '数据归集专题';
         case '/public':
-          return '双公示专题'
+          return '双公示专题';
         case '/union':
-          return '联合奖惩专题'
+          return '联合奖惩专题';
         case '/map':
-          return '区域数据归集'
+          return '区域数据归集';
         case '/home':
-          return '中航天智慧工地综合服务平台'
+          return '中航天智慧工地综合服务平台';
         case '/login':
-          return '中航天智慧工地综合服务平台'
+          return '中航天智慧工地综合服务平台';
       }
     },
     logout() {
-      localStorage.clear()
-      this.$router.push('/login')
-    }
-  }
-}
+      localStorage.clear();
+      this.$router.push('/login');
+    },
+  },
+};
 </script>
 
 <style>

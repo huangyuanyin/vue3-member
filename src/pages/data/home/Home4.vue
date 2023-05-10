@@ -42,82 +42,16 @@
         <!-- 中航天智慧工地综合服务平台 -->
       </div>
       <div class="s-wrap">
-        <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="我的导航" name="first">
-            <el-card class="box-card" shadow="always">
-              <div class="box-header">
-                我的导航
-                <!-- <el-button type="text" icon="el-icon-edit" disabled>
-                  编辑
-                </el-button> -->
-              </div>
-              <div class="icon_list">
-                <div
-                  @contextmenu.prevent.capture
-                  class="icon-item"
-                  v-for="(item, index) in bottomList"
-                  :key="'bottomList' + index"
-                  @click="toLink(item.url)"
-                >
-                  <el-dropdown
-                    ref="Contextmenu"
-                    :hide-on-click="true"
-                    placement="top-end"
-                    @command="
-                      (command) => {
-                        command2(command, item);
-                      }
-                    "
-                  >
-                    <div>
-                      <svg-icon
-                        @contextmenu.stop="handContextmenu"
-                        :iconName="item.icon"
-                        className="aaa"
-                        style="margin-bottom: 20px"
-                      ></svg-icon>
-                      <span
-                        class="bbb"
-                        style="display: inline-block; text-align: center"
-                      >
-                        {{ item.name }}
-                      </span>
-                    </div>
-                    <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item>密码本</el-dropdown-item>
-                    </el-dropdown-menu>
-                  </el-dropdown>
-                </div>
-                <!-- <div
-                  style="
-                    width: 120px;
-                    height: 100px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                  "
-                >
-                  <div class="icon-item-add" @click="tip">
-                    <i class="el-icon-plus" style="padding: 8px"></i>
-                  </div>
-                </div> -->
-              </div>
-            </el-card>
-          </el-tab-pane>
-          <el-tab-pane label="公告" name="second">
-            <div class="noticeList">
-              <div
-                class="notice"
-                v-for="(item, index) in noticeList"
-                :key="'noticeList' + index"
-                @click="toNotice(item.id)"
-              >
-                <span>{{ item.updateTime }}</span>
-                <div>{{ item.title }}</div>
-              </div>
-            </div>
-          </el-tab-pane>
-        </el-tabs>
+        <div class="s-warp-top">
+          <span class="top-title">{{ data2.title }}</span>
+          <div class="s-wrap-time">
+            <span>发布时间：</span>
+            <span>{{ data2.updateTime }}</span>
+            <span style="margin-left: 50px">来源：</span>
+            <span>中航天建设工程集团有限公司</span>
+          </div>
+        </div>
+        <Markdown-Preview :docTxt="notice"></Markdown-Preview>
       </div>
     </div>
     <div class="bottom_wrap">
@@ -187,14 +121,24 @@
   </div>
 </template>
 <script>
-import { dishPage, addDishCount, getNoticeListApi } from '@/api/user';
+import {
+  dishPage,
+  addDishCount,
+  getNoticeListApi,
+  getNoticeDetailApi,
+} from '@/api/user';
+import MarkdownPreview from '@/components/Markdown/preview.vue';
 export default {
   name: 'demo',
-  components: {},
+  components: {
+    'Markdown-Preview': MarkdownPreview,
+  },
   data() {
     return {
       countsList: [{ userName: '', password: '' }],
       noticeList: [],
+      data2: {},
+      notice: '',
       rules: {
         userName: [{ required: true, message: '请输入账号', trigger: 'blur' }],
         password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
@@ -220,6 +164,7 @@ export default {
     handleClick(tab, event) {
       console.log(tab, event);
     },
+    fullScreen() {},
     async dishPageList() {
       this.isLoading = true;
       let res = await dishPage({
@@ -280,11 +225,6 @@ export default {
       }
       this.countsList.splice(index, 1);
     },
-    toNotice(id) {
-      console.log(`output->id`, id);
-      let url = 'http://localhost:8080/#/home4?id=' + id;
-      window.open(url, '_blank');
-    },
     async submitForm() {
       const forms = this.$refs.formRef;
       if (forms) {
@@ -329,9 +269,15 @@ export default {
       }
     },
   },
-  created() {
-    this.dishPageList();
-    this.init();
+  async created() {
+    let res = await getNoticeDetailApi(this.$route.query.id);
+    if (res.code == 1) {
+      this.notice = res.data.notice;
+      this.data2 = res.data;
+      console.log(`output->`, res.data);
+    } else {
+      this.$message.error(res.msg || '请求失败');
+    }
   },
 };
 </script>
@@ -351,7 +297,10 @@ export default {
   border-radius: 50%;
   /* display: inline-block; */
 }
-
+.el-dropdown-link {
+  display: flex !important;
+  flex-direction: row !important;
+}
 .el-dropdown-link img {
   position: relative;
   /* top: 1px; */
@@ -424,13 +373,31 @@ export default {
   border-radius: 16px;
   box-sizing: content-box;
   background: #fff;
-  padding: 14px 32px 0;
   width: 60%;
   position: fixed;
-  top: 26%;
+  top: 24%;
   left: 20%;
 }
 
+.s-warp-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.top-title {
+  color: #2676cf;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: '微软雅黑';
+  height: 30px;
+}
+.s-wrap-time {
+  color: #999;
+  height: 50px;
+  line-height: 50px;
+}
 .box-card {
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
   position: relative;
@@ -506,10 +473,7 @@ export default {
   box-shadow: 0 3px 20px 1px rgba(0, 0, 0, 0.16);
   border-radius: 6px 6px 6px 6px;
 }
-.el-dropdown-link {
-  display: flex !important;
-  flex-direction: row !important;
-}
+
 /deep/.el-dropdown-selfdefine {
   display: flex;
   flex-direction: column;

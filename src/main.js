@@ -1,39 +1,43 @@
-import "@babel/polyfill";
-import Vue from "vue";
+import '@babel/polyfill';
+import Vue from 'vue';
 // import Vuex from 'vuex'
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
-import BinAdmin from "./plugin";
-import "./assets/styles/index.styl";
-import ECharts from "vue-echarts/components/ECharts";
-import "echarts/lib/chart/pie";
-import "echarts/lib/chart/bar";
-import ElementUI, { Calendar } from "element-ui";
-import "./assets/styles/calendar.styl";
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import BinAdmin from './plugin';
+import './assets/styles/index.styl';
+import ECharts from 'vue-echarts/components/ECharts';
+import 'echarts/lib/chart/pie';
+import 'echarts/lib/chart/bar';
+import ElementUI, { Calendar } from 'element-ui';
+import './assets/styles/calendar.styl';
 // mock
-import "./mock/mockServer";
+import './mock/mockServer';
 
-import "../permission";
+import '../permission';
 
-import SvgIcon from "./components/SvgIcon.vue";
-import "./assets/iconfont/iconfont.js";
-import "./assets/iconfont/iconfont-2.js"
+import SvgIcon from './components/SvgIcon.vue';
+import './assets/iconfont/iconfont.js';
+import './assets/iconfont/iconfont-2.js';
 
-import "element-ui/lib/theme-chalk/index.css";
+import 'element-ui/lib/theme-chalk/index.css';
 
-import EasySlider from "vue-easy-slider";
+import EasySlider from 'vue-easy-slider';
+
+import mavonEditor from 'mavon-editor';
+import 'mavon-editor/dist/css/index.css';
 
 Vue.use(BinAdmin);
 // Vue.component(Subarea)
-Vue.component("chart", ECharts);
-Vue.component("SvgIcon", SvgIcon);
+Vue.component('chart', ECharts);
+Vue.component('SvgIcon', SvgIcon);
 Vue.use(ElementUI);
 Vue.use(Calendar);
 Vue.use(EasySlider);
+Vue.use(mavonEditor);
 
 new Vue({
   router,
   store,
   render: (h) => h(App),
-}).$mount("#app");
+}).$mount('#app');
