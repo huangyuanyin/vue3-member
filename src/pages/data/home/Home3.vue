@@ -284,7 +284,7 @@ export default {
     },
     toNotice(id) {
       console.log(`output->id`, id);
-      let url = 'http://localhost:8080/#/home4?id=' + id;
+      let url = 'http://101.43.127.118:7000/#/home4?id=' + id;
       window.open(url, '_blank');
     },
     async submitForm() {
