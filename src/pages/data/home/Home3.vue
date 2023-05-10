@@ -201,7 +201,8 @@ export default {
       },
       // 获取localStorage中的用户信息
       userName: JSON.parse(localStorage.getItem('userInfo')).sub,
-      employeeId: '', // 网站id
+      skipId: '', // 网站id
+      skipName: '', // 网站名称
       dialogVisible: false,
       activeName: 'first',
       isLoading: false,
@@ -253,7 +254,8 @@ export default {
     },
     command2(item, index) {
       console.log(`output->index`, index);
-      this.employeeId = index.id;
+      this.skipId = index.id;
+      this.skipName = index.name;
       this.countsList = index.count;
       this.dialogVisible = true;
     },
@@ -304,9 +306,13 @@ export default {
         }
       }
       let res = await addDishCount({
-        userID: JSON.parse(localStorage.getItem('userInfo')).jti,
-        employeeId: this.employeeId,
-        count: this.countsList,
+        employeeId: JSON.parse(localStorage.getItem('userInfo')).jti,
+        skipId: this.skipId,
+        skipName: this.skipName,
+        count: this.countsList.map(({ userName, password }) => ({
+          userName,
+          password,
+        })),
       });
       if (res.code === 1) {
         this.$message({
@@ -351,7 +357,12 @@ export default {
   border-radius: 50%;
   /* display: inline-block; */
 }
-
+.el-dropdown-link {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: row !important;
+}
 .el-dropdown-link img {
   position: relative;
   /* top: 1px; */
