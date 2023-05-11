@@ -6,7 +6,7 @@
         <span>产品</span>
         <span>公告</span>
         <span>解决方案</span>
-        <span>更多</span>
+        <span class="passroed" @click="openPass">密码本</span>
       </div>
       <div class="top-right">
         <span>北京</span>
@@ -115,6 +115,12 @@
                 <span>{{ item.updateTime }}</span>
                 <div>{{ item.title }}</div>
               </div>
+              <div
+                v-if="noticeList.length >= 15"
+                style="text-align: center; color: #aaaaaa; margin-bottom: 10px"
+              >
+                暂无更多了~
+              </div>
             </div>
           </el-tab-pane>
         </el-tabs>
@@ -168,7 +174,7 @@
               ></el-input>
             </el-form-item>
             <el-button
-              type="primary"
+              type="warning"
               @click="addRow(index)"
               style="margin: 0 20px 0 30px"
             >
@@ -184,6 +190,69 @@
         <el-button type="primary" @click="submitForm">确 定</el-button>
       </span>
     </el-dialog>
+    <el-dialog
+      title="密码本"
+      :visible.sync="passDialogVisible"
+      width="60%"
+      :before-close="handleClose"
+    >
+      <div class="" v-for="(item, index) in passList">
+        <el-form
+          ref="formPassRef"
+          :model="item"
+          :rules="passRules"
+          label-width="100px"
+        >
+          <div style="display: flex; margin-bottom: 20px">
+            <el-form-item
+              :key="index"
+              :label="'网站名' + (index + 1)"
+              prop="website"
+            >
+              <el-input
+                v-model="item.website"
+                placeholder="请输入网站名称"
+              ></el-input>
+            </el-form-item>
+            <el-form-item
+              :key="index"
+              :label="'账号' + (index + 1)"
+              prop="userName"
+            >
+              <el-input
+                v-model="item.userName"
+                placeholder="请输入账号"
+              ></el-input>
+            </el-form-item>
+            <el-form-item
+              :key="'password' + index"
+              :label="'密码' + (index + 1)"
+              prop="password"
+            >
+              <el-input
+                v-model="item.password"
+                placeholder="请输入密码"
+              ></el-input>
+            </el-form-item>
+            <el-button
+              type="warning"
+              @click="addPassRow(index)"
+              style="margin: 0 20px 0 30px"
+            >
+              新增
+            </el-button>
+            <el-button type="danger" @click="removePassRow(index)">
+              删除
+            </el-button>
+          </div>
+        </el-form>
+      </div>
+
+      <span slot="footer" class="dialog-footer">
+        <!-- <el-button @click="dialogVisible = false">取 消</el-button> -->
+        <el-button type="primary" @click="submitPassForm">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -194,8 +263,16 @@ export default {
   data() {
     return {
       countsList: [{ userName: '', password: '' }],
+      passList: [{ website: '', userName: '', password: '' }],
       noticeList: [],
       rules: {
+        userName: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+      },
+      passRules: {
+        website: [
+          { required: true, message: '请输入网站名称', trigger: 'blur' },
+        ],
         userName: [{ required: true, message: '请输入账号', trigger: 'blur' }],
         password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
       },
@@ -204,6 +281,7 @@ export default {
       skipId: '', // 网站id
       skipName: '', // 网站名称
       dialogVisible: false,
+      passDialogVisible: false,
       activeName: 'first',
       isLoading: false,
       bottomList: [],
@@ -218,6 +296,15 @@ export default {
     };
   },
   methods: {
+    openPass() {
+      this.passDialogVisible = true;
+    },
+    addPassRow(index) {
+      this.passList.push({ website: '', userName: '', password: '' });
+    },
+    removePassRow(index) {
+      this.passList.splice(index, 1);
+    },
     handleClick(tab, event) {
       console.log(tab, event);
     },
@@ -262,6 +349,9 @@ export default {
     handleClose(done) {
       this.dialogVisible = false;
       this.countsList = [{ userName: '', password: '' }];
+      this.passDialogVisible = false;
+      this.passList = [{ website: '', userName: '', password: '' }];
+      done();
     },
     handleCommand(command) {
       if (command === 'a') {
@@ -321,6 +411,43 @@ export default {
         });
         this.dialogVisible = false;
         this.countsList = [{ userName: '', password: '' }];
+      }
+    },
+    async submitPassForm() {
+      const forms = this.$refs.formPassRef;
+      if (forms) {
+        for (const item of forms) {
+          try {
+            const result = await item.validate();
+            if (!result) {
+              return;
+            }
+          } catch (error) {
+            this.$message({
+              message: '请完善网站名账号和密码',
+              type: 'warning',
+            });
+            return;
+          }
+        }
+      }
+      let res = await addDishCount({
+        employeeId: JSON.parse(localStorage.getItem('userInfo')).jti,
+        skipId: this.skipId,
+        skipName: this.skipName,
+        count: this.passList.map(({ website, userName, password }) => ({
+          website,
+          userName,
+          password,
+        })),
+      });
+      if (res.code === 1) {
+        this.$message({
+          message: '修改成功',
+          type: 'success',
+        });
+        this.passDialogVisible = false;
+        this.passList = [{ website: '', userName: '', password: '' }];
       }
     },
     async init() {
@@ -548,6 +675,10 @@ export default {
   overflow-y: auto;
   max-height: 50vh;
 }
+/** 隐藏滚动条 */
+.noticeList::-webkit-scrollbar {
+  display: none;
+}
 .notice {
   display: flex;
   padding: 10px 0px;
@@ -590,5 +721,9 @@ export default {
 }
 .el-form .el-form-item {
   margin-bottom: 0px;
+}
+
+.passroed:hover {
+  color: #416bfb;
 }
 </style>
