@@ -59,7 +59,7 @@
                   :key="'bottomList' + index"
                   @click="toLink(item.url)"
                 >
-                  <el-dropdown
+                  <!-- <el-dropdown
                     ref="Contextmenu"
                     :hide-on-click="true"
                     placement="top-end"
@@ -68,25 +68,25 @@
                         command2(command, item);
                       }
                     "
-                  >
-                    <div>
-                      <svg-icon
-                        @contextmenu.stop="handContextmenu"
-                        :iconName="item.icon"
-                        className="aaa"
-                        style="margin-bottom: 20px"
-                      ></svg-icon>
-                      <span
-                        class="bbb"
-                        style="display: inline-block; text-align: center"
-                      >
-                        {{ item.name }}
-                      </span>
-                    </div>
-                    <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item>密码本</el-dropdown-item>
-                    </el-dropdown-menu>
-                  </el-dropdown>
+                  > -->
+                  <div style="display: flex; flex-direction: column">
+                    <svg-icon
+                      @contextmenu.stop="handContextmenu"
+                      :iconName="item.icon"
+                      className="aaa"
+                      style="margin-bottom: 20px"
+                    ></svg-icon>
+                    <span
+                      class="bbb"
+                      style="display: inline-block; text-align: center"
+                    >
+                      {{ item.name }}
+                    </span>
+                  </div>
+                  <!-- <el-dropdown-menu slot="dropdown"> -->
+                  <!-- <el-dropdown-item>密码本</el-dropdown-item> -->
+                  <!-- </el-dropdown-menu> -->
+                  <!-- </el-dropdown> -->
                 </div>
                 <!-- <div
                   style="
@@ -241,7 +241,7 @@
             >
               新增
             </el-button>
-            <el-button type="danger" @click="removePassRow(index)">
+            <el-button type="danger" @click="removePassRow(item, index)">
               删除
             </el-button>
           </div>
@@ -256,7 +256,13 @@
   </div>
 </template>
 <script>
-import { dishPage, addDishCount, getNoticeListApi } from '@/api/user';
+import {
+  dishPage,
+  addDishCount,
+  getNoticeListApi,
+  getDishCount,
+  deleteDishCount,
+} from '@/api/user';
 export default {
   name: 'demo',
   components: {},
@@ -296,14 +302,36 @@ export default {
     };
   },
   methods: {
-    openPass() {
+    async openPass() {
       this.passDialogVisible = true;
+      const params = {
+        id: JSON.parse(localStorage.getItem('userInfo')).jti,
+        page: 1,
+        pageSize: 10000,
+      };
+      let res = await getDishCount(params);
+      if (res.code == 1) {
+        this.passList = res.data.records;
+      }
+      if (this.passList.length === 0) {
+        this.passList = [{ website: '', userName: '', password: '' }];
+      }
     },
     addPassRow(index) {
       this.passList.push({ website: '', userName: '', password: '' });
     },
-    removePassRow(index) {
-      this.passList.splice(index, 1);
+    async removePassRow(val, index) {
+      if (this.passList.length <= 1) {
+        this.$message({
+          message: '至少保留一个账号密码',
+          type: 'warning',
+        });
+        return;
+      }
+      let res = await deleteDishCount(val.id);
+      if (res.code == 1) {
+        this.passList.splice(index, 1);
+      }
     },
     handleClick(tab, event) {
       console.log(tab, event);
@@ -433,8 +461,8 @@ export default {
       }
       let res = await addDishCount({
         employeeId: JSON.parse(localStorage.getItem('userInfo')).jti,
-        skipId: this.skipId,
-        skipName: this.skipName,
+        // skipId: this.skipId,
+        // skipName: this.skipName,
         count: this.passList.map(({ website, userName, password }) => ({
           website,
           userName,
@@ -443,7 +471,7 @@ export default {
       });
       if (res.code === 1) {
         this.$message({
-          message: '修改成功',
+          message: '密码本更新成功',
           type: 'success',
         });
         this.passDialogVisible = false;

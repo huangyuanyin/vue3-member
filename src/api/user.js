@@ -39,6 +39,21 @@ export function addDishCount(params) {
   });
 }
 
+export function deleteDishCount(id) {
+  return request({
+    url: `/count?id=${id}`,
+    method: 'delete',
+  });
+}
+
+export function getDishCount(params) {
+  return request({
+    url: '/dish/countpage',
+    method: 'get',
+    params,
+  });
+}
+
 export const getNoticeListApi = (params) => {
   return request({
     url: '/notice/page',
