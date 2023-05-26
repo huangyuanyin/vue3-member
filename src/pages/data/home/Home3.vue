@@ -187,7 +187,7 @@
 
       <span slot="footer" class="dialog-footer">
         <!-- <el-button @click="dialogVisible = false">取 消</el-button> -->
-        <el-button type="primary" @click="submitForm">确 定</el-button>
+        <el-button type="primary" @click="submitForm">保 存</el-button>
       </span>
     </el-dialog>
     <el-dialog
@@ -250,7 +250,7 @@
 
       <span slot="footer" class="dialog-footer">
         <!-- <el-button @click="dialogVisible = false">取 消</el-button> -->
-        <el-button type="primary" @click="submitPassForm">确 定</el-button>
+        <el-button type="primary" @click="submitPassForm">保 存</el-button>
       </span>
     </el-dialog>
   </div>
@@ -328,9 +328,9 @@ export default {
         });
         return;
       }
+      this.passList.splice(index, 1);
       let res = await deleteDishCount(val.id);
       if (res.code == 1) {
-        this.passList.splice(index, 1);
       }
     },
     handleClick(tab, event) {
