@@ -55,7 +55,7 @@
                 v-waves
                 :loading="loginLoading"
               >
-                {{ loginLoading ? "登录中..." : "登 录" }}
+                {{ loginLoading ? '登录中...' : '登 录' }}
               </b-button>
             </b-form>
           </div>
@@ -91,8 +91,8 @@ export default {
   data: function() {
     return {
       formLogin: {
-        username: "admin",
-        password: "123456"
+        username: "",
+        password: ""
         // captcha: ""
       },
       // 校验
@@ -299,7 +299,7 @@ export default {
   padding-bottom: 20px;
 }
 .background-img {
-  background-image: url("https://3.bp.blogspot.com/-piZWCW2uUbg/W2fPXxkWZgI/AAAAAAAAOu0/eydmMjTIqcwLMHEEr2H7imqoRTxMw4o9QCLcBGAs/s1600/among_trees_night_dribbble.png");
+  background-image: url('https://3.bp.blogspot.com/-piZWCW2uUbg/W2fPXxkWZgI/AAAAAAAAOu0/eydmMjTIqcwLMHEEr2H7imqoRTxMw4o9QCLcBGAs/s1600/among_trees_night_dribbble.png');
   height: 400px;
   width: 800px;
   background-repeat: no-repeat;
@@ -360,7 +360,7 @@ export default {
 }
 
 .box:before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: -100%;
@@ -423,7 +423,7 @@ export default {
 }
 
 .box span:before {
-  content: "";
+  content: '';
   position: absolute;
   width: 100%;
   height: 2px;

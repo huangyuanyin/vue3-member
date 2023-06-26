@@ -88,8 +88,8 @@ export default {
       timeInterval: null,
       // 表单
       formLogin: {
-        username: 'admin',
-        password: '123456',
+        username: '',
+        password: '',
         // captcha: ""
       },
       // 校验
