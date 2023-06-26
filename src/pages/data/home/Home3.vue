@@ -146,9 +146,11 @@
     </div>
     <el-dialog
       title="密码本"
-      :visible.sync="dialogVisible"
+      :visible="dialogVisible"
       width="50%"
       :before-close="handleClose"
+      :close-on-press-escape="false"
+      :close-on-click-modal="false"
     >
       <div class="" v-for="(item, index) in countsList">
         <el-form ref="formRef" :model="item" :rules="rules" label-width="80px">
@@ -195,6 +197,8 @@
       :visible.sync="passDialogVisible"
       width="60%"
       :before-close="handleClose"
+      :close-on-press-escape="false"
+      :close-on-click-modal="false"
     >
       <div class="" v-for="(item, index) in passList">
         <el-form
