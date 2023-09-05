@@ -41,18 +41,18 @@
         />
         <!-- 中航天智慧工地综合服务平台 -->
       </div>
-      <div class="s-wrap">
-        <div class="s-warp-top">
-          <span class="top-title">{{ data2.title }}</span>
-          <div class="s-wrap-time">
-            <span>发布时间：</span>
-            <span>{{ data2.updateTime }}</span>
-            <span style="margin-left: 50px">来源：</span>
-            <span>中航天建设工程集团有限公司</span>
-          </div>
+    </div>
+    <div class="s-wrap">
+      <div class="s-warp-top">
+        <span class="top-title">{{ data2.title }}</span>
+        <div class="s-wrap-time">
+          <span>发布时间：</span>
+          <span>{{ data2.updateTime }}</span>
+          <span style="margin-left: 50px">来源：</span>
+          <span>中航天建设工程集团有限公司</span>
         </div>
-        <Markdown-Preview :docTxt="notice"></Markdown-Preview>
       </div>
+      <Markdown-Preview :docTxt="notice"></Markdown-Preview>
     </div>
     <div class="bottom_wrap">
       <div style="margin-right: 20px">
@@ -352,11 +352,12 @@ export default {
 .bottom_wrap {
   width: 100%;
   position: absolute;
-  bottom: 20px;
+  bottom: 5px;
   left: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 10vh;
 }
 
 .backwrap {
@@ -376,9 +377,10 @@ export default {
   box-sizing: content-box;
   background: #fff;
   width: 60%;
-  position: fixed;
+  /* position: fixed;
   top: 24%;
-  left: 20%;
+  left: 20%; */
+  margin-bottom: 12vh;
 }
 
 .s-warp-top {
@@ -538,6 +540,9 @@ export default {
   background-position: 0 100%;
   background-size: 100% auto;
   height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .el-form {
   display: flex;
