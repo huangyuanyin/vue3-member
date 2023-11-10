@@ -2,15 +2,16 @@
   <div class="Home3-wrap">
     <div class="top_wrap">
       <div class="top-left">
-        <span>公司</span>
-        <span>产品</span>
-        <span>公告</span>
+        <!-- <span>公司</span> -->
+        <span @click="toJD">产品与服务</span>
         <span>解决方案</span>
-        <span class="passroed" @click="openPass">密码本</span>
+        <span>公告通知</span>
+        <!-- <span class="passroed" @click="tocarbonEmission">碳排放管理</span> -->
       </div>
       <div class="top-right">
+        <span class="passroed" @click="openPass">密码本</span>
+        <span>数据看板</span>
         <span>北京</span>
-        <span>设置</span>
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
             <span class="header" style="margin-right: 3px">
@@ -123,6 +124,13 @@
               </div>
             </div>
           </el-tab-pane>
+          <el-tab-pane label="项目概括" name="1" disabled></el-tab-pane>
+          <el-tab-pane label="智慧管理" name="1" disabled></el-tab-pane>
+          <el-tab-pane label="智慧创安" name="1" disabled></el-tab-pane>
+          <el-tab-pane label="智慧提质" name="1" disabled></el-tab-pane>
+          <el-tab-pane label="智慧增绿" name="1" disabled></el-tab-pane>
+          <el-tab-pane label="智慧创卫" name="1" disabled></el-tab-pane>
+          <el-tab-pane label="智慧建造" name="1" disabled></el-tab-pane>
         </el-tabs>
       </div>
     </div>
@@ -288,6 +296,8 @@ export default {
       },
       // 获取localStorage中的用户信息
       userName: JSON.parse(localStorage.getItem('userInfo')).sub,
+      sub: JSON.parse(localStorage.getItem('userInfo')).sub,
+      jti: JSON.parse(localStorage.getItem('userInfo')).jti,
       skipId: '', // 网站id
       skipName: '', // 网站名称
       dialogVisible: false,
@@ -320,6 +330,15 @@ export default {
       if (this.passList.length === 0) {
         this.passList = [{ website: '', userName: '', password: '' }];
       }
+    },
+    toJD() {
+      window.open('https://www.jd.com');
+    },
+    tocarbonEmission() {
+      window.open(
+        `http://150.158.195.212:15050/?sub=${this.sub}&jti=${this.jti}`,
+        '_blank',
+      );
     },
     addPassRow(index) {
       this.passList.push({ website: '', userName: '', password: '' });
