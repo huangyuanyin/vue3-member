@@ -2,15 +2,14 @@
   <div class="Home3-wrap">
     <div class="top_wrap">
       <div class="top-left">
-        <span>公司</span>
-        <span>产品</span>
-        <span>公告</span>
+        <span @click="toJD">产品与服务</span>
         <span>解决方案</span>
-        <span>更多</span>
+        <span @click="AnnouncementShow = true">公告通知</span>
       </div>
       <div class="top-right">
+        <span class="passroed" @click="openPass">密码本</span>
+        <span>数据看板</span>
         <span>北京</span>
-        <span>设置</span>
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
             <span class="header" style="margin-right: 3px">
@@ -50,6 +49,14 @@
           <span>{{ data2.updateTime }}</span>
           <span style="margin-left: 50px">来源：</span>
           <span>中航天建设工程集团有限公司</span>
+          <span style="margin-left: 50px" v-if="data2.file">附件：</span>
+          <span
+            style="color: #004098; cursor: pointer"
+            v-if="data2.file"
+            @click="toDown(data2)"
+          >
+            点击下载
+          </span>
         </div>
       </div>
       <Markdown-Preview :docTxt="notice"></Markdown-Preview>
@@ -120,6 +127,32 @@
         <el-button type="primary" @click="submitForm">确 定</el-button>
       </span>
     </el-dialog>
+    <el-dialog
+      :visible.sync="AnnouncementShow"
+      title="公告通知"
+      width="60%"
+      :close-on-press-escape="false"
+      :close-on-click-modal="false"
+      class="AnnouncementShow"
+    >
+      <div class="noticeList">
+        <div
+          class="notice"
+          v-for="(item, index) in noticeList"
+          :key="'noticeList' + index"
+          @click="toNotice(item.id)"
+        >
+          <span>{{ item.updateTime }}</span>
+          <div>{{ item.title }}</div>
+        </div>
+        <div
+          v-if="noticeList.length >= 15"
+          style="text-align: center; color: #aaaaaa; margin-bottom: 10px"
+        >
+          暂无更多了~
+        </div>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -128,6 +161,7 @@ import {
   addDishCount,
   getNoticeListApi,
   getNoticeDetailApi,
+  downNoticeApi,
 } from '@/api/user';
 import MarkdownPreview from '@/components/Markdown/preview.vue';
 export default {
@@ -151,6 +185,7 @@ export default {
       dialogVisible: false,
       activeName: 'first',
       isLoading: false,
+      AnnouncementShow: false,
       bottomList: [],
       iconList: [
         'icon-maozi',
@@ -167,6 +202,11 @@ export default {
       console.log(tab, event);
     },
     fullScreen() {},
+    async toDown(val) {
+      const url =
+        'http://101.43.127.118:8080/notice/download/?fileName=' + val.file;
+      window.open(url);
+    },
     async dishPageList() {
       this.isLoading = true;
       let res = await dishPage({
@@ -207,6 +247,9 @@ export default {
     handleClose(done) {
       this.dialogVisible = false;
       this.countsList = [{ userName: '', password: '' }];
+    },
+    toJD() {
+      window.open('https://www.jd.com');
     },
     handleCommand(command) {
       if (command === 'a') {
@@ -550,5 +593,11 @@ export default {
 }
 .el-form .el-form-item {
   margin-bottom: 0px;
+}
+</style>
+
+<style lang="css">
+.AnnouncementShow .el-dialog__body {
+  padding-top: 10px !important;
 }
 </style>

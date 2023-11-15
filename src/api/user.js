@@ -61,6 +61,7 @@ export const getNoticeListApi = (params) => {
     params,
   });
 };
+
 export const getNoticeDetailApi = (params) => {
   return request({
     url: `/notice/${params}`,

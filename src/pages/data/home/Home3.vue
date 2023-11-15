@@ -5,7 +5,7 @@
         <!-- <span>公司</span> -->
         <span @click="toJD">产品与服务</span>
         <span>解决方案</span>
-        <span>公告通知</span>
+        <span @click="AnnouncementShow = true">公告通知</span>
         <!-- <span class="passroed" @click="tocarbonEmission">碳排放管理</span> -->
       </div>
       <div class="top-right">
@@ -42,25 +42,26 @@
         />
         <!-- 中航天智慧工地综合服务平台 -->
       </div>
-      <div class="s-wrap">
+      <div class="s-wrap" v-if="!isLooking">
         <el-tabs v-model="activeName" @tab-click="handleClick">
+          <!--
           <el-tab-pane label="我的导航" name="first">
             <el-card class="box-card" shadow="always">
               <div class="box-header">
                 我的导航
-                <!-- <el-button type="text" icon="el-icon-edit" disabled>
+                <el-button type="text" icon="el-icon-edit" disabled>
                   编辑
-                </el-button> -->
+                </el-button>
               </div>
               <div class="icon_list">
                 <div
                   @contextmenu.prevent.capture
                   class="icon-item"
-                  v-for="(item, index) in bottomList"
-                  :key="'bottomList' + index"
+                  v-for="(item, index) in tabList"
+                  :key="'tabList' + index"
                   @click="toLink(item.url)"
                 >
-                  <!-- <el-dropdown
+                  <el-dropdown
                     ref="Contextmenu"
                     :hide-on-click="true"
                     placement="top-end"
@@ -69,7 +70,7 @@
                         command2(command, item);
                       }
                     "
-                  > -->
+                  >
                   <div style="display: flex; flex-direction: column">
                     <svg-icon
                       @contextmenu.stop="handContextmenu"
@@ -84,54 +85,94 @@
                       {{ item.name }}
                     </span>
                   </div>
-                  <!-- <el-dropdown-menu slot="dropdown"> -->
-                  <!-- <el-dropdown-item>密码本</el-dropdown-item> -->
-                  <!-- </el-dropdown-menu> -->
-                  <!-- </el-dropdown> -->
                 </div>
-                <!-- <div
-                  style="
-                    width: 120px;
-                    height: 100px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                  "
+              </div>
+            </el-card>
+          </el-tab-pane> -->
+          <el-tab-pane label="全部" name="全部">
+            <el-card class="box-card" shadow="always">
+              <div class="box-header">全部</div>
+              <div class="icon_list">
+                <div
+                  @contextmenu.prevent.capture
+                  class="icon-item"
+                  v-for="(item, index) in bottomList"
+                  :key="'bottomList' + index"
+                  @click="toLink(item.url)"
                 >
-                  <div class="icon-item-add" @click="tip">
-                    <i class="el-icon-plus" style="padding: 8px"></i>
+                  <div style="display: flex; flex-direction: column">
+                    <svg-icon
+                      @contextmenu.stop="handContextmenu"
+                      :iconName="item.icon"
+                      className="aaa"
+                      style="margin-bottom: 20px"
+                    ></svg-icon>
+                    <span
+                      class="bbb"
+                      style="display: inline-block; text-align: center"
+                    >
+                      {{ item.name }}
+                    </span>
                   </div>
-                </div> -->
+                </div>
               </div>
             </el-card>
           </el-tab-pane>
-          <el-tab-pane label="公告" name="second">
-            <div class="noticeList">
-              <div
-                class="notice"
-                v-for="(item, index) in noticeList"
-                :key="'noticeList' + index"
-                @click="toNotice(item.id)"
-              >
-                <span>{{ item.updateTime }}</span>
-                <div>{{ item.title }}</div>
+          <el-tab-pane
+            :label="item.label"
+            :name="item.label"
+            v-for="(item, index) in tabName"
+            :key="'tabName' + index"
+          >
+            <el-card class="box-card" shadow="always">
+              <div class="box-header">{{ item.label }}</div>
+              <div class="icon_list">
+                <div
+                  @contextmenu.prevent.capture
+                  class="icon-item"
+                  v-for="(item, index) in tabList"
+                  :key="'tabList' + index"
+                  @click="toLink(item.url)"
+                >
+                  <div style="display: flex; flex-direction: column">
+                    <svg-icon
+                      @contextmenu.stop="handContextmenu"
+                      :iconName="item.icon"
+                      className="aaa"
+                      style="margin-bottom: 20px"
+                    ></svg-icon>
+                    <span
+                      class="bbb"
+                      style="display: inline-block; text-align: center"
+                    >
+                      {{ item.name }}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div
-                v-if="noticeList.length >= 15"
-                style="text-align: center; color: #aaaaaa; margin-bottom: 10px"
-              >
-                暂无更多了~
-              </div>
-            </div>
+            </el-card>
           </el-tab-pane>
-          <el-tab-pane label="项目概括" name="1" disabled></el-tab-pane>
-          <el-tab-pane label="智慧管理" name="1" disabled></el-tab-pane>
-          <el-tab-pane label="智慧创安" name="1" disabled></el-tab-pane>
-          <el-tab-pane label="智慧提质" name="1" disabled></el-tab-pane>
-          <el-tab-pane label="智慧增绿" name="1" disabled></el-tab-pane>
-          <el-tab-pane label="智慧创卫" name="1" disabled></el-tab-pane>
-          <el-tab-pane label="智慧建造" name="1" disabled></el-tab-pane>
         </el-tabs>
+      </div>
+      <div class="s-wrap" v-else>
+        <div class="s-warp-top">
+          <span class="top-title">{{ data2.title }}</span>
+          <div class="s-wrap-time">
+            <span>发布时间：</span>
+            <span>{{ data2.updateTime }}</span>
+            <span style="margin-left: 50px">来源：</span>
+            <span>中航天建设工程集团有限公司</span>
+            <span style="margin-left: 50px" v-if="data2.file">附件：</span>
+            <span
+              style="color: #004098; cursor: pointer"
+              v-if="data2.file"
+              @click="toDown(data2)"
+            >
+              点击下载
+            </span>
+          </div>
+        </div>
+        <Markdown-Preview :docTxt="notice"></Markdown-Preview>
       </div>
     </div>
     <div class="bottom_wrap">
@@ -265,6 +306,32 @@
         <el-button type="primary" @click="submitPassForm">保 存</el-button>
       </span>
     </el-dialog>
+    <el-dialog
+      :visible.sync="AnnouncementShow"
+      title="公告通知"
+      width="60%"
+      :close-on-press-escape="false"
+      :close-on-click-modal="false"
+      class="AnnouncementShow"
+    >
+      <div class="noticeList">
+        <div
+          class="notice"
+          v-for="(item, index) in noticeList"
+          :key="'noticeList' + index"
+          @click="toNotice(item.id)"
+        >
+          <span>{{ item.updateTime }}</span>
+          <div>{{ item.title }}</div>
+        </div>
+        <div
+          v-if="noticeList.length >= 15"
+          style="text-align: center; color: #aaaaaa; margin-bottom: 10px"
+        >
+          暂无更多了~
+        </div>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -274,10 +341,14 @@ import {
   getNoticeListApi,
   getDishCount,
   deleteDishCount,
+  getNoticeDetailApi,
 } from '@/api/user';
+import MarkdownPreview from '@/components/Markdown/preview.vue';
 export default {
   name: 'demo',
-  components: {},
+  components: {
+    'Markdown-Preview': MarkdownPreview,
+  },
   data() {
     return {
       countsList: [{ userName: '', password: '' }],
@@ -298,13 +369,26 @@ export default {
       userName: JSON.parse(localStorage.getItem('userInfo')).sub,
       sub: JSON.parse(localStorage.getItem('userInfo')).sub,
       jti: JSON.parse(localStorage.getItem('userInfo')).jti,
+      notice: '',
+      data2: {},
       skipId: '', // 网站id
       skipName: '', // 网站名称
       dialogVisible: false,
       passDialogVisible: false,
-      activeName: 'first',
+      AnnouncementShow: false,
+      activeName: '全部',
       isLoading: false,
+      isLooking: false,
       bottomList: [],
+      tabList: [],
+      tabName: [
+        { label: '智慧管理', value: '智慧管理' },
+        { label: '智慧创安', value: '智慧创安' },
+        { label: '智慧提质', value: '智慧提质' },
+        { label: '智慧增绿', value: '智慧增绿' },
+        { label: '智慧创卫', value: '智慧创卫' },
+        { label: '智慧建造', value: '智慧建造' },
+      ],
       iconList: [
         'icon-maozi',
         'icon-zhihuigongdi',
@@ -334,6 +418,10 @@ export default {
     toJD() {
       window.open('https://www.jd.com');
     },
+    async toDown(val) {
+      const url = 'http://101.43.127.118:8080/notice/download/?id=' + val.id;
+      window.open(url);
+    },
     tocarbonEmission() {
       window.open(
         `http://150.158.195.212:15050/?sub=${this.sub}&jti=${this.jti}`,
@@ -357,7 +445,10 @@ export default {
       }
     },
     handleClick(tab, event) {
-      console.log(tab, event);
+      this.tabList = this.bottomList.filter(
+        (item) => item.categoryType === tab.name,
+      );
+      console.log(tab.name, this.tabList);
     },
     async dishPageList() {
       this.isLoading = true;
@@ -425,7 +516,7 @@ export default {
     },
     toNotice(id) {
       console.log(`output->id`, id);
-      let url = 'http://101.43.127.118:7000/#/home4?id=' + id;
+      let url = 'http://192.168.94.221:8081/#/home3?id=' + id;
       window.open(url, '_blank');
     },
     async submitForm() {
@@ -513,9 +604,23 @@ export default {
       }
     },
   },
-  created() {
+  async created() {
     this.dishPageList();
     this.init();
+    console.log(`output->`);
+    if (this.$route.query.id) {
+      this.isLooking = true;
+      let res = await getNoticeDetailApi(this.$route.query.id);
+      if (res.code == 1) {
+        this.notice = res.data.notice;
+        this.data2 = res.data;
+        console.log(`output->`, res.data);
+      } else {
+        this.$message.error(res.msg || '请求失败');
+      }
+    } else {
+      this.isLooking = false;
+    }
   },
 };
 </script>
@@ -615,9 +720,10 @@ export default {
   background: #fff;
   padding: 14px 32px 0;
   width: 60%;
-  position: fixed;
+  /* position: fixed;
   top: 26%;
-  left: 20%;
+  left: 20%; */
+  margin-bottom: 12vh;
 }
 
 .box-card {
@@ -746,7 +852,7 @@ export default {
 }
 
 .notice span {
-  font-size: 10px;
+  font-size: 14px;
   color: #7eacdb;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -776,5 +882,52 @@ export default {
 
 .passroed:hover {
   color: #416bfb;
+}
+
+.s-warp-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.top-title {
+  color: #2676cf;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: '微软雅黑';
+  height: 30px;
+}
+.s-wrap-time {
+  color: #999;
+  height: 50px;
+  line-height: 50px;
+}
+.box-card {
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.4);
+  /* border: 1px solid rgba(0, 0, 0, 0.05); */
+  border-radius: 12px;
+  font-family: Arial, sans-serif;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.box-card ::-webkit-scrollbar {
+  display: none;
+}
+
+.box-card /deep/.el-card__body {
+  padding: 0 !important;
+  height: 100%;
+}
+</style>
+
+<style lang="css">
+.AnnouncementShow .el-dialog__body {
+  padding-top: 10px !important;
 }
 </style>
