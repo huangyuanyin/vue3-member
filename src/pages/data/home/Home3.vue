@@ -98,7 +98,7 @@
                   class="icon-item"
                   v-for="(item, index) in bottomList"
                   :key="'bottomList' + index"
-                  @click="toLink(item.url)"
+                  @click="toLink(item)"
                 >
                   <div style="display: flex; flex-direction: column">
                     <svg-icon
@@ -132,7 +132,7 @@
                   class="icon-item"
                   v-for="(item, index) in tabList"
                   :key="'tabList' + index"
-                  @click="toLink(item.url)"
+                  @click="toLink(item)"
                 >
                   <div style="display: flex; flex-direction: column">
                     <svg-icon
@@ -475,11 +475,19 @@ export default {
       });
     },
     toLink(it) {
-      // 如果it是http开头的，就直接打开，否则就加上http://
-      if (it.indexOf('http') == -1) {
-        it = 'http://' + it;
+      console.log(`output->it`, this.sub, this.jti);
+      if (it.name === '碳计量工具') {
+        window.open(
+          `http://150.158.195.212:15050/?sub=${this.sub}&jti=${this.jti}`,
+          '_blank',
+        );
+      } else {
+        // 如果it是http开头的，就直接打开，否则就加上http://
+        if (it.url.indexOf('http') == -1) {
+          it.url = 'http://' + it;
+        }
+        window.open(it.url, '_blank');
       }
-      window.open(it, '_blank');
     },
     command2(item, index) {
       console.log(`output->index`, index);
@@ -516,7 +524,7 @@ export default {
     },
     toNotice(id) {
       console.log(`output->id`, id);
-      let url = 'http://192.168.94.221:8081/#/home3?id=' + id;
+      let url = 'http://101.43.127.118:7000/#/home3?id=' + id;
       window.open(url, '_blank');
     },
     async submitForm() {
