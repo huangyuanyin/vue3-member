@@ -475,8 +475,7 @@ export default {
       });
     },
     toLink(it) {
-      console.log(`output->it`, this.sub, this.jti);
-      if (it.name === '碳计量工具') {
+      if (it.id === '1724956836676796418') {
         window.open(
           `http://150.158.195.212:15050/?sub=${this.sub}&jti=${this.jti}`,
           '_blank',
