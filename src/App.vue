@@ -43,9 +43,9 @@ export default {
         case '/map':
           return '区域数据归集';
         case '/home':
-          return '中航天智慧工地综合服务平台';
+          return '智慧工地综合服务平台';
         case '/login':
-          return '中航天智慧工地综合服务平台';
+          return '智慧工地综合服务平台';
       }
     },
     logout() {

@@ -15,7 +15,7 @@
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
             <span class="header" style="margin-right: 3px">
-              <img src="@/assets/images/QQ.jpg" alt="" srcset="" />
+              <!-- <img src="@/assets/images/QQ.jpg" alt="" srcset="" /> -->
             </span>
             <span>{{ userName }}</span>
           </span>
@@ -35,12 +35,12 @@
           margin-top: 2.5%;
         "
       >
-        <img
+        <!-- <img
           style="width: 800px; height: 86px"
           src="@/assets/images/wx.svg"
           alt=""
-        />
-        <!-- 中航天智慧工地综合服务平台 -->
+        /> -->
+        <span style="line-height: 80px">智慧工地综合服务平台</span>
       </div>
       <div class="s-wrap" v-if="!isLooking">
         <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -176,13 +176,13 @@
       </div>
     </div>
     <div class="bottom_wrap">
-      <div style="margin-right: 20px">
+      <!-- <div style="margin-right: 20px">
         <img
           style="width: 110px; height: 76px"
           src="@/assets/images/QQ.jpg"
           alt=""
         />
-      </div>
+      </div> -->
       <div class="backwrap">
         <span>Copyright©中国航天科工集团公司 中航天智慧工地综合服务平台</span>
         <span>

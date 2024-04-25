@@ -12,7 +12,7 @@
       src="../../assets/images/logo.png"
       alt="logo"
     /> -->
-    <div class="header">中航天智慧工地综合管理平台</div>
+    <div class="header">智慧工地综合管理平台</div>
     <!--登录框-->
     <div class="layer">
       <div class="content" flex="dir:top main:center cross:center">

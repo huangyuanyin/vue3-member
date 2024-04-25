@@ -48,7 +48,7 @@
           <span>发布时间：</span>
           <span>{{ data2.updateTime }}</span>
           <span style="margin-left: 50px">来源：</span>
-          <span>中航天建设工程集团有限公司</span>
+          <span>建设工程集团有限公司</span>
           <span style="margin-left: 50px" v-if="data2.file">附件：</span>
           <span
             style="color: #004098; cursor: pointer"
