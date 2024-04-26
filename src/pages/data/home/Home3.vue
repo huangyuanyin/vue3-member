@@ -419,7 +419,7 @@ export default {
       window.open('https://www.jd.com');
     },
     async toDown(val) {
-      const url = 'http://101.43.127.118:8080/notice/download/?id=' + val.id;
+      const url = 'http://81.70.224.230:8080/notice/download/?id=' + val.id;
       window.open(url);
     },
     tocarbonEmission() {
