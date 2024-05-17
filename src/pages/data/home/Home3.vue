@@ -522,8 +522,7 @@ export default {
       this.countsList.splice(index, 1);
     },
     toNotice(id) {
-      console.log(`output->id`, id);
-      let url = 'http://101.43.127.118:7000/#/home3?id=' + id;
+      let url = 'http://81.70.224.230:7000/#/home3?id=' + id;
       window.open(url, '_blank');
     },
     async submitForm() {
