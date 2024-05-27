@@ -184,12 +184,12 @@
         />
       </div> -->
       <div class="backwrap">
-        <span>Copyright©智慧工地综合服务平台</span>
+        <!-- <span>Copyright©智慧工地综合服务平台</span>
         <span>
           制作单位：建设工程集团有限公司 地址：北京市丰台区看丹路4号院甲6号
           邮编：100070 联系电话：(010)83680501
         </span>
-        <span>欢迎关注官方微信公众号：casic-ZHT</span>
+        <span>欢迎关注官方微信公众号：casic-ZHT</span> -->
       </div>
     </div>
     <el-dialog

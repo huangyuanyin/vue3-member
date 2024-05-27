@@ -33,7 +33,7 @@ export default {
 
 <style>
 .v-note-wrapper {
-  max-height: 55vh !important;
+  max-height: 65vh !important;
   /*透明背景色 */
   background: transparent !important;
 }

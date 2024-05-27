@@ -1,7 +1,12 @@
 <template>
   <div class="home">
     <div class="particles-wrapper" id="particlesId">
-      <canvas class="particles-js-canvas-el" width="1560" height="560" style="width: 100%; height: 100%"></canvas>
+      <canvas
+        class="particles-js-canvas-el"
+        width="1560"
+        height="560"
+        style="width: 100%; height: 100%"
+      ></canvas>
     </div>
     <div v-if="isLoading">数据加载中....</div>
     <div class="bg-wrapper" v-else>
@@ -9,7 +14,12 @@
       <img src="@/assets/images/124124.jpeg" alt="" style="width: 1000px" />
       <img src="@/assets/images/125125.jpeg" alt="" style="width: 1000px" />
       <img src="@/assets/images/126126.jpeg" alt="" style="width: 1000px" /> -->
-      <slider animation="fade" width="100vw" height="24vh" style="margin: 0 auto">
+      <slider
+        animation="fade"
+        width="100vw"
+        height="24vh"
+        style="margin: 0 auto"
+      >
         <slider-item v-for="(i, index) in list" :key="index">
           <img :src="i" style="width: 100%" />
         </slider-item>
@@ -33,7 +43,11 @@
           src="@/assets/images/124124.jpeg"
         />
       </div> -->
-      <div class="container" v-if="counts >= 1" @click="toLink(tableData[0].url)">
+      <div
+        class="container"
+        v-if="counts >= 1"
+        @click="toLink(tableData[0].url)"
+      >
         <!-- <div class="background-img"> -->
         <div class="box" style="top: 45%; left: 25%">
           <span></span>
@@ -41,12 +55,20 @@
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon iconName="icon-yunjiankong" size="30" className="aaa"></svg-icon>
+            <svg-icon
+              iconName="icon-yunjiankong"
+              size="30"
+              className="aaa"
+            ></svg-icon>
             <div class="content-div">{{ tableData[0].name }}</div>
           </div>
         </div>
       </div>
-      <div class="container" v-if="counts >= 2" @click="toLink(tableData[1].url)">
+      <div
+        class="container"
+        v-if="counts >= 2"
+        @click="toLink(tableData[1].url)"
+      >
         <!-- <div class="background-img"> -->
         <div class="box" style="top: 45%; left: 50%">
           <span></span>
@@ -54,7 +76,11 @@
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon iconName="icon-jiankong2" size="30" className="aaa"></svg-icon>
+            <svg-icon
+              iconName="icon-jiankong2"
+              size="30"
+              className="aaa"
+            ></svg-icon>
             <div class="content-div">{{ tableData[1].name }}</div>
             <!-- <p>
               <a
@@ -66,7 +92,11 @@
           </div>
         </div>
       </div>
-      <div class="container" v-if="counts >= 3" @click="toLink(tableData[2].url)">
+      <div
+        class="container"
+        v-if="counts >= 3"
+        @click="toLink(tableData[2].url)"
+      >
         <!-- <div class="background-img"> -->
         <div class="box" style="top: 45%; left: 75%">
           <span></span>
@@ -74,12 +104,20 @@
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon iconName="icon-jiankong1" size="30" className="aaa"></svg-icon>
+            <svg-icon
+              iconName="icon-jiankong1"
+              size="30"
+              className="aaa"
+            ></svg-icon>
             <div class="content-div">{{ tableData[2].name }}</div>
           </div>
         </div>
       </div>
-      <div class="container" v-if="counts >= 4" @click="toLink(tableData[3].url)">
+      <div
+        class="container"
+        v-if="counts >= 4"
+        @click="toLink(tableData[3].url)"
+      >
         <!-- <div class="background-img"> -->
         <div class="box" style="top: 65%; left: 25%">
           <span></span>
@@ -87,7 +125,11 @@
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon iconName="icon-jiankong" size="30" className="aaa"></svg-icon>
+            <svg-icon
+              iconName="icon-jiankong"
+              size="30"
+              className="aaa"
+            ></svg-icon>
             <div class="content-div">{{ tableData[3].name }}</div>
             <!-- <p>
               <a
@@ -99,7 +141,11 @@
           </div>
         </div>
       </div>
-      <div class="container" v-if="counts >= 5" @click="toLink(tableData[4].url)">
+      <div
+        class="container"
+        v-if="counts >= 5"
+        @click="toLink(tableData[4].url)"
+      >
         <!-- <div class="background-img"> -->
         <div class="box" style="top: 65%; left: 50%">
           <span></span>
@@ -107,7 +153,11 @@
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon iconName="icon-yunjiankong" size="30" className="aaa"></svg-icon>
+            <svg-icon
+              iconName="icon-yunjiankong"
+              size="30"
+              className="aaa"
+            ></svg-icon>
             <div class="content-div">{{ tableData[4].name }}</div>
             <!-- <p>
               <a
@@ -119,7 +169,11 @@
           </div>
         </div>
       </div>
-      <div class="container" v-if="counts >= 6" @click="toLink(tableData[5].url)">
+      <div
+        class="container"
+        v-if="counts >= 6"
+        @click="toLink(tableData[5].url)"
+      >
         <!-- <div class="background-img"> -->
         <div class="box" style="top: 65%; left: 75%">
           <span></span>
@@ -127,7 +181,11 @@
           <span></span>
           <span></span>
           <div class="content">
-            <svg-icon iconName="icon-jiankong3" size="30" className="aaa"></svg-icon>
+            <svg-icon
+              iconName="icon-jiankong3"
+              size="30"
+              className="aaa"
+            ></svg-icon>
             <div class="content-div">{{ tableData[5].name }}</div>
             <!-- <p>
               <a
@@ -140,23 +198,32 @@
         </div>
       </div>
       <div class="bottom-container">
-        <div class="item" v-for="(item, index) in bottomList" :key="'bottomList' + index" @click="toLink(item.url)">
+        <div
+          class="item"
+          v-for="(item, index) in bottomList"
+          :key="'bottomList' + index"
+          @click="toLink(item.url)"
+        >
           <svg-icon :iconName="item.icon" size="30" className="aaa"></svg-icon>
           <p>{{ item.name }}</p>
         </div>
       </div>
       <div class="backImg">
         <div style="margin-right: 20px">
-          <img style="width: 110px; height: 76px" src="@/assets/images/2323.gif" alt="" />
+          <img
+            style="width: 110px; height: 76px"
+            src="@/assets/images/2323.gif"
+            alt=""
+          />
         </div>
         <div class="backwrap">
-          <span>Copyright©智慧工地综合服务平台</span>
+          <!-- <span>Copyright©智慧工地综合服务平台</span>
           <span></span>
           制作单位：建设工程集团有限公司
           地址：北市市丰台区看丹路4号院甲6号 邮编：100070
           联系电话：(010)83680501
           </span>
-          <span>欢迎关注官方微信公众号：casic-ZHT</span>
+          <span>欢迎关注官方微信公众号：casic-ZHT</span> -->
         </div>
       </div>
     </div>
@@ -797,7 +864,7 @@ ul {
   transition: opacity 3.5s;
 }
 
-#imglist>li img {
+#imglist > li img {
   height: 1000px;
 }
 
@@ -811,7 +878,7 @@ ul {
   transform: translate(-50%);
 }
 
-#dotlist>li {
+#dotlist > li {
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -824,8 +891,8 @@ ul {
 
 /* 具有appear类的元素设为 不透明 即显示 */
 
-#imglist>li.appear,
-#dotlist>li.appear {
+#imglist > li.appear,
+#dotlist > li.appear {
   opacity: 1;
 }
 
