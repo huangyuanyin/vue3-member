@@ -161,7 +161,7 @@
             <span>发布时间：</span>
             <span>{{ data2.updateTime }}</span>
             <span style="margin-left: 50px">来源：</span>
-            <span>中航天建设工程集团有限公司</span>
+            <span>建设工程集团有限公司</span>
             <span style="margin-left: 50px" v-if="data2.file">附件：</span>
             <span
               style="color: #004098; cursor: pointer"
@@ -184,11 +184,10 @@
         />
       </div> -->
       <div class="backwrap">
-        <span>Copyright©中国航天科工集团公司 中航天智慧工地综合服务平台</span>
+        <span>Copyright©智慧工地综合服务平台</span>
         <span>
-          制作单位：中航天建设工程集团有限公司
-          地址：北京市丰台区看丹路4号院甲6号 邮编：100070
-          联系电话：(010)83680501
+          制作单位：建设工程集团有限公司 地址：北京市丰台区看丹路4号院甲6号
+          邮编：100070 联系电话：(010)83680501
         </span>
         <span>欢迎关注官方微信公众号：casic-ZHT</span>
       </div>

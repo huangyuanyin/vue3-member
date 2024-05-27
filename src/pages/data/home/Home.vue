@@ -150,7 +150,7 @@
           <img style="width: 110px; height: 76px" src="@/assets/images/2323.gif" alt="" />
         </div>
         <div class="backwrap">
-          <span>Copyright©中国航天科工集团公司 智慧工地综合服务平台</span>
+          <span>Copyright©智慧工地综合服务平台</span>
           <span></span>
           制作单位：建设工程集团有限公司
           地址：北市市丰台区看丹路4号院甲6号 邮编：100070
