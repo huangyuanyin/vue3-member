@@ -40,7 +40,7 @@
           src="@/assets/images/wx.svg"
           alt=""
         /> -->
-        <span style="line-height: 80px">智慧工地综合服务平台</span>
+        <span style="line-height: 80px">中航天智慧工地综合服务平台</span>
       </div>
       <div class="s-wrap" v-if="!isLooking">
         <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -176,20 +176,20 @@
       </div>
     </div>
     <div class="bottom_wrap">
-      <!-- <div style="margin-right: 20px">
+      <div style="margin-right: 20px">
         <img
           style="width: 110px; height: 76px"
           src="@/assets/images/QQ.jpg"
           alt=""
         />
-      </div> -->
+      </div>
       <div class="backwrap">
-        <!-- <span>Copyright©智慧工地综合服务平台</span>
+        <span>Copyright©中国航天科工集团公司 中航天智慧工地综合服务平台</span>
         <span>
           制作单位：建设工程集团有限公司 地址：北京市丰台区看丹路4号院甲6号
           邮编：100070 联系电话：(010)83680501
         </span>
-        <span>欢迎关注官方微信公众号：casic-ZHT</span> -->
+        <span>欢迎关注官方微信公众号：casic-ZHT</span>
       </div>
     </div>
     <el-dialog
